@@ -634,7 +634,7 @@ export type MapEvent =
     | 'boxzoomcancel'
 
     /**
-     * Fired immediately after the map has been resized.
+     * 在调整地图大小后立即触发
      *
      * @event resize
      * @memberof Map
@@ -689,7 +689,7 @@ export type MapEvent =
     | 'render'
 
     /**
-     * Fired immediately after the map has been removed with {@link Map.event:remove}.
+     * 在使用{@link Map.event:remove}删除映射后立即触发.
      *
      * @event remove
      * @memberof Map
