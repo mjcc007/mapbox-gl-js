@@ -1,6 +1,6 @@
 /*---
-title: Add a WMS source
-description: Adding an external Web Map Service layer to the map
+title: 增加WMS源
+description: 增加外部Web地图服务层
 tags:
   - sources
 pathname: /mapbox-gl-js/example/wms/

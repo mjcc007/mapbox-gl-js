@@ -1,7 +1,7 @@
 /*---
-title: Add a third party vector tile source
+title: 增加第三方矢量贴片源
 description: >-
-  Render vector data provided by [Mapillary](https://www.mapillary.com/developer/tiles-documentation/#sequence-layer).
+  渲染所提供的矢量数据 [Mapillary](https://www.mapillary.com/developer/tiles-documentation/#sequence-layer).
 tags:
   - sources
 pathname: /mapbox-gl-js/example/third-party/
