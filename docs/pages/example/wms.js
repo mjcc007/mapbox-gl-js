@@ -1,6 +1,6 @@
 /*---
 title: 增加WMS源
-description: 增加外部Web地图服务层
+description: 地图增加外部Web服务层
 tags:
   - sources
 pathname: /mapbox-gl-js/example/wms/
