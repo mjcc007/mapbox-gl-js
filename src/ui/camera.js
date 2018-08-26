@@ -20,19 +20,20 @@ import type Transform from '../geo/transform';
 import type {LngLatLike} from '../geo/lng_lat';
 import type {LngLatBoundsLike} from '../geo/lng_lat_bounds';
 import type {TaskID} from '../util/task_queue';
+import type {PointLike} from '@mapbox/point-geometry';
 
 /**
- * Options common to {@link Map#jumpTo}, {@link Map#easeTo}, and {@link Map#flyTo}, controlling the desired location,
- * zoom, bearing, and pitch of the camera. All properties are optional, and when a property is omitted, the current
- * camera value for that property will remain unchanged.
+ * 照相机的常用选项，用于 {@link Map#jumpTo}, {@link Map#easeTo}, 和 {@link Map#flyTo} 。
+ * 控制摄像机的期望位置、变焦、方位和俯仰角。
+ * 属性都是可选的。 当省略某个属性时，该属性的当前相机设置会保持不变。
  *
  * @typedef {Object} CameraOptions
- * @property {LngLatLike} center The desired center.
- * @property {number} zoom The desired zoom level.
- * @property {number} bearing The desired bearing, in degrees. The bearing is the compass direction that
- * is "up"; for example, a bearing of 90° orients the map so that east is up.
- * @property {number} pitch The desired pitch, in degrees.
- * @property {LngLatLike} around If `zoom` is specified, `around` determines the point around which the zoom is centered.
+ * @property {LngLatLike} center 设置的中心点
+ * @property {number} zoom 设置的变焦级别
+ * @property {number} bearing 设置的方位，单位是角度。指针方位是朝上的指南针方向。
+ * 例如，指向 90° 方位，表明地图上方是东部。
+ * @property {number} pitch 设置的俯仰角。单位是角度。
+ * @property {LngLatLike} around 设置了变焦级别，则 `around` 决定了焦点的周围点。
  */
 export type CameraOptions = {
     center?: LngLatLike,
@@ -43,16 +44,15 @@ export type CameraOptions = {
 };
 
 /**
- * Options common to map movement methods that involve animation, such as {@link Map#panBy} and
- * {@link Map#easeTo}, controlling the duration and easing function of the animation. All properties
- * are optional.
+ *  地图移动方法的常用选项， {@link Map#panBy} 、{@link Map#easeTo} 等方法有用到，控制动画的持续时间、动画的缓动函数。
+ * 属性都是可选的。
  *
  * @typedef {Object} AnimationOptions
- * @property {number} duration The animation's duration, measured in milliseconds.
- * @property {Function} easing A function taking a time in the range 0..1 and returning a number where 0 is
- *   the initial state and 1 is the final state.
- * @property {PointLike} offset of the target center relative to real map container center at the end of animation.
- * @property {boolean} animate If `false`, no animation will occur.
+ * @property {number} duration 动画的持续时间，单位是毫秒
+ * @property {Function} easing 缓动函数。函数的参数是时间值，值在0到1之间。
+ * 返回一个数字，其中0是初始状态，1是最终状态。
+ * @property {PointLike} offset 动画结束时，目标中心点相对实际地图容器中心点的偏移量
+ * @property {boolean} animate 如果设置否，就不会出现动画。
  */
 export type AnimationOptions = {
     duration?: number,
@@ -62,14 +62,14 @@ export type AnimationOptions = {
 };
 
 /**
- * Options for setting padding on a call to {@link Map#fitBounds}. All properties of this object must be
- * non-negative integers.
+ * 设置内边距的选项，调用 {@link Map#fitBounds} 用到。
+ * 该对象的属性都必须是非负整数。
  *
  * @typedef {Object} PaddingOptions
- * @property {number} top Padding in pixels from the top of the map canvas.
- * @property {number} bottom Padding in pixels from the bottom of the map canvas.
- * @property {number} left Padding in pixels from the left of the map canvas.
- * @property {number} right Padding in pixels from the right of the map canvas.
+ * @property {number} top 地图画布的上内边距，单位是像素
+ * @property {number} bottom 地图画布的下内边距，单位是像素
+ * @property {number} left 地图画布的左内边距，单位是像素
+ * @property {number} right 地图画布的右内边距，单位是像素
  */
 
 class Camera extends Evented {
@@ -120,7 +120,6 @@ class Camera extends Evented {
      * @returns {Map} `this`
      * @example
      * map.setCenter([-74, 38]);
-     * @see [Move symbol with the keyboard](https://www.mapbox.com/mapbox-gl-js/example/rotating-controllable-marker/)
      */
     setCenter(center: LngLatLike, eventData?: Object) {
         return this.jumpTo({center: center}, eventData);
