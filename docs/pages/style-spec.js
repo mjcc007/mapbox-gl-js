@@ -827,8 +827,7 @@ export default class extends React.Component {
                                 </li>
                                 <li><code>{`{range}`}</code>
                                     请求字形时，此标记将替换为256个Unicode代码点。例如，加载<a href="https://en.wikipedia.org/wiki/Unicode_block">的Unicode Basic Latin字形和
-                                    <a href="https://en.wikipedia.org/wiki/Unicode_block">的Unicode Basic Latin字形，以及
-                                        Basic Latin-1的Supplement blocks</a>, 这个范围是 <code>0-255</code>. 实际加载范围
+                                    Basic Latin-1的Supplement blocks</a>, 这个范围是 <code>0-255</code>. 实际加载范围 
                                     是根据需要显示的文本在运行时确定的。
                                 </li>
                             </ul>
