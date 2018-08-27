@@ -13,11 +13,11 @@ import type Dispatcher from '../util/dispatcher';
 import type {Evented} from '../util/evented';
 
 /**
- * A data source containing video.
- * (See the [Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#sources-video) for detailed documentation of options.)
+ * 该数据源含有视频.
+ * (在此查看可选项的详细文档说明. [Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#sources-video))
  *
- * @example
- * // add to map
+ * @例子
+ * // 添加到地图
  * map.addSource('some id', {
  *    type: 'video',
  *    url: [
@@ -32,7 +32,7 @@ import type {Evented} from '../util/evented';
  *    ]
  * });
  *
- * // update
+ * // 更新
  * var mySource = map.getSource('some id');
  * mySource.setCoordinates([
  *     [-76.54335737228394, 39.18579907229748],
@@ -41,8 +41,8 @@ import type {Evented} from '../util/evented';
  *     [-76.54520273208618, 39.17876344106642]
  * ]);
  *
- * map.removeSource('some id');  // remove
- * @see [Add a video](https://www.mapbox.com/mapbox-gl-js/example/video-on-a-map/)
+ * map.removeSource('some id');  // 移除
+ * @见 [Add a video](https://www.mapbox.com/mapbox-gl-js/example/video-on-a-map/)
  */
 class VideoSource extends ImageSource {
     options: VideoSourceSpecification;
@@ -51,7 +51,7 @@ class VideoSource extends ImageSource {
     roundZoom: boolean;
 
     /**
-     * @private
+     * @私有的
      */
     constructor(id: string, options: VideoSourceSpecification, dispatcher: Dispatcher, eventedParent: Evented) {
         super(id, options, dispatcher, eventedParent);
@@ -91,9 +91,9 @@ class VideoSource extends ImageSource {
     }
 
     /**
-     * Returns the HTML `video` element.
+     * 返回HTML `video` 元素.
      *
-     * @returns {HTMLVideoElement} The HTML `video` element.
+     * @返回 {HTMLVideoElement} HTML的 `video`元素.
      */
     getVideo() {
         return this.video;
@@ -110,18 +110,18 @@ class VideoSource extends ImageSource {
     }
 
     /**
-     * Sets the video's coordinates and re-renders the map.
+     * 设置视频的坐标，并重新渲染地图.
      *
-     * @method setCoordinates
-     * @instance
-     * @memberof VideoSource
-     * @param {Array<Array<number>>} coordinates Four geographical coordinates,
-     *   represented as arrays of longitude and latitude numbers, which define the corners of the video.
-     *   The coordinates start at the top left corner of the video and proceed in clockwise order.
-     *   They do not have to represent a rectangle.
-     * @returns {VideoSource} this
+     * @方法 setCoordinates的方法
+     * @例子
+     * @VideoSource的成员
+     * @param {Array<Array<number>>} coordinates 四个地理坐标,
+     *   以经度和维度的数列方式，对视频框的四个角做定义.
+     *   坐标从视频的左上角开始，并顺时针依次代表视频的其他角.
+     *   视频可以是除正方形以外的形状.
+     * @返回 {VideoSource} this
      */
-    // setCoordinates inherited from ImageSource
+    // setCoordinates 继承自 ImageSource
 
     prepare() {
         if (Object.keys(this.tiles).length === 0 || this.video.readyState < 2) {
