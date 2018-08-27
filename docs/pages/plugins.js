@@ -14,124 +14,120 @@ const meta = {
 };
 
 const plugins = {
-    "User Interface Plugins": {
+    "UI插件": {
         "mapbox-gl-accessibility": {
             "website": "https://github.com/mapbox/mapbox-gl-accessibility/",
-            "description": "integrates with ARIA-compatible screen readers for users with visual impairments"
+            "description": "为视力障碍的用户集成ARIA屏幕阅读器"
         },
         "mapbox-gl-boundaries": {
             "website": "https://github.com/mapbox/mapbox-gl-boundaries",
-            "description": "enables users to show/hide disputed borders"
+            "description": "允许用户展示/隐藏有争议的地图边界"
         },
         "mapbox-gl-compare": {
             "website": "https://github.com/mapbox/mapbox-gl-compare",
-            "description": "enables users to compare two maps by swiping left and right",
+            "description": "允许用户通过左右滑动，来比较两张地图",
             "example": "mapbox-gl-compare"
         },
         "mapbox-gl-directions": {
             "website": "https://github.com/mapbox/mapbox-gl-directions",
-            "description": "adds a control which allows users to plot driving, walking, and cycling directions on the map",
+            "description": "添加控件，允许用户在地图上规划自驾、骑行、步行的路线",
             "example": "mapbox-gl-directions"
         },
         "mapbox-gl-draw": {
             "website": "https://github.com/mapbox/mapbox-gl-draw",
-            "description": "adds support for drawing and editing features on Mapbox GL JS maps",
+            "description": "在Mapbox GL JS地图上添加绘制和编辑功能",
             "example": "mapbox-gl-draw"
         },
         "mapbox-gl-geocoder": {
             "website": "https://github.com/mapbox/mapbox-gl-geocoder",
-            "description": "adds a Geocoder control to Mapbox GL JS",
+            "description": "为Mapbox GL JS添加Geocoder控制",
             "example": "mapbox-gl-geocoder"
         },
         "mapboxgl-minimap": {
             "website": "https://github.com/aesqe/mapboxgl-minimap",
-            "description": "adds a control showing a miniature overview of the current map"
+            "description": "添加一个控件，展示当前地图的微型预览"
         }
     },
-    "Map Rendering Plugins": {
+    "地图渲染插件": {
         "mapbox-gl-language": {
             "website": "https://github.com/mapbox/mapbox-gl-language/",
-            "description": "automatically localizes the map into the user’s language"
+            "description": "自动将地名翻译为当前用户的语言"
         },
         "mapbox-gl-rtl-text": {
             "website": "https://github.com/mapbox/mapbox-gl-rtl-text",
-            "description": "adds right-to-left text support to Mapbox GL JS",
+            "description": "允许Mapbox GL JS支持添加，可读性为从右至左的文本",
             "example": "mapbox-gl-rtl-text"
-        },
-        "mapbox-gl-traffic": {
-            "website": "https://github.com/mapbox/mapbox-gl-traffic",
-            "description": "hide and show traffic layers on your map with an optional toggle button"
         },
         "deck.gl": {
             "website": "https://github.com/uber/deck.gl",
-            "description": "adds advanced WebGL visualization layers to Mapbox GL JS"
+            "description": "为Mapbox GL JS添加WebGl的可视化图层"
         }
     },
-    "Framework Integrations": {
+    "框架集成": {
         "echartslayer": {
             "website": "https://github.com/lzxue/echartLayer",
-            "description": md`provides an [echarts](https://ecomfe.github.io/echarts/index-en.html) integration for Mapbox GL JS`
+            "description": md`为Mapbox GL JS集成[echarts](https://ecomfe.github.io/echarts/index-en.html)`
         },
         "wtMapbox": {
             "website": "https://github.com/yvanvds/wtMapbox",
-            "description": md`provides a [Webtoolkit](https://www.webtoolkit.eu/wt) integration for Mapbox GL JS`
+            "description": md`为Mapbox GL JS集成[Webtoolkit](https://www.webtoolkit.eu/wt)`
         },
         "react-mapbox-gl": {
             "website": "https://github.com/alex3165/react-mapbox-gl",
-            "description": md`provides a [React](https://facebook.github.io/react/) integration for Mapbox GL JS`
+            "description": md`为Mapbox GL JS集成[React](https://facebook.github.io/react/)`
         },
         "angular-mapboxgl-directive": {
             "website": "https://github.com/Naimikan/angular-mapboxgl-directive",
-            "description": md`provides an [AngularJS](https://angularjs.org/) directive for Mapbox GL JS`
+            "description": md`为Mapbox GL JS提供[AngularJS](https://angularjs.org/)指令`
         },
         "ngx-mapbox-gl": {
             "website": "https://github.com/Wykks/ngx-mapbox-gl",
-            "description": md`provides an [Angular](https://angular.io/) integration for Mapbox GL JS`
+            "description": md`为Mapbox GL JS集成[Angular](https://angular.io/)`
         }
     },
-    "Utility Libraries": {
+    "实用工具库": {
         "turf": {
             "website": "http://turfjs.org/",
-            "description": "provides advanced geospatial analysis tools"
+            "description": "提供高级的地理空间分析工具"
         },
         "mapbox-gl-layer-groups": {
             "website": "https://github.com/mapbox/mapbox-gl-layer-groups",
-            "description": "manages layer groups in Mapbox GL JS"
+            "description": "在Mapbox GL JS上管理图层组"
         },
         "expression-jamsession": {
             "website": "https://github.com/mapbox/expression-jamsession/",
-            "description": md`converts [Mapbox Studio formulas](https://www.mapbox.com/help/studio-manual-styles/#use-a-formula) into [expressions](https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions)`
+            "description": md`将[Mapbox Studio formulas](https://www.mapbox.com/help/studio-manual-styles/#use-a-formula)转变为[expressions](https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions)`
         },
         "simplespec-to-gl-style": {
             "website": "https://github.com/mapbox/simplespec-to-gl-style",
-            "description": md`converts GeoJSON styled with [\`simplestyle-spec\`](https://github.com/mapbox/simplestyle-spec/) to a Mapbox GL Style`
+            "description": md`通过[\`simplestyle-spec\`](https://github.com/mapbox/simplestyle-spec/)将GeoJSON转化为Mapbox GL Style`
         },
         "mapbox-gl-supported": {
             "website": "https://github.com/mapbox/mapbox-gl-supported",
-            "description": "determines if the current browser supports Mapbox GL JS",
+            "description": "确认当前浏览器是否支持Mapbox GL JS",
             "example": "mapbox-gl-supported"
         },
         "mapbox-gl-sync-move": {
             "website": "https://github.com/mapbox/mapbox-gl-sync-move",
-            "description": "syncs movement between two Mapbox GL JS maps"
+            "description": "在两张Mapbox GL JS地图同步移动"
         },
         "mapbox-choropleth": {
             "website": "https://github.com/stevage/mapbox-choropleth",
-            "description": "create a choropleth layer from a CSV source and a geometry source"
+            "description": "通过CSV源和geometry源创建choropleth图层"
         }
     },
-    "Development Tools": {
+    "开发工具": {
         "mapbox-gl-js-mock": {
             "website": "https://github.com/mapbox/mapbox-gl-js-mock",
-            "description": md`is a [mock](https://en.wikipedia.org/wiki/Mock_object) of Mapbox GL JS`
+            "description": md`Mapbox GL JS的[mock](https://en.wikipedia.org/wiki/Mock_object)工具`
         },
         "mapbox-gl-inspect": {
             "website": "https://github.com/lukasmartinelli/mapbox-gl-inspect",
-            "description": "adds an inspect control to view vector source features and properties"
+            "description": "添加一个检查控件，查看矢量源的功能与属性"
         },
         "mapbox-gl-fps": {
             "website": "https://github.com/MazeMap/mapbox-gl-fps",
-            "description": "A frames-per-seconds GUI control and measurer with statistic report output."
+            "description": "一个帧每秒的GUI控件，检测和输出统计报告"
         }
     }
 };
@@ -168,7 +164,7 @@ export default class extends React.Component {
                                             <h3><a href={plugin.website}>{name}</a></h3>
                                             { plugin.example && <a
                                                 className="small quiet rcon"
-                                                href={prefixUrl(`/example/${plugin.example}`)}>view example</a> }
+                                                href={prefixUrl(`/example/${plugin.example}`)}>查看示例</a> }
                                             <p>{ plugin.description }</p>
                                         </div>
                                     )}

@@ -6,8 +6,8 @@ import type Map from '../map';
 import type {MapMouseEvent, MapTouchEvent} from '../events';
 
 /**
- * The `DoubleClickZoomHandler` allows the user to zoom the map at a point by
- * double clicking or double tapping.
+ * `DoubleClickZoomHandler` 允许用户通过鼠标双击或者手指双击屏幕上的一个点来缩放地图
+ * 
  */
 class DoubleClickZoomHandler {
     _map: Map;
@@ -28,27 +28,27 @@ class DoubleClickZoomHandler {
     }
 
     /**
-     * Returns a Boolean indicating whether the "double click to zoom" interaction is enabled.
+     * 返回一个布尔值，指示是否启用了“双击缩放”交互.
      *
-     * @returns {boolean} `true` if the "double click to zoom" interaction is enabled.
+     * @返回 {boolean} `true`如果启用了“双击缩放”交互.
      */
     isEnabled() {
         return !!this._enabled;
     }
 
     /**
-     * Returns a Boolean indicating whether the "double click to zoom" interaction is active, i.e. currently being used.
+     * 返回一个布尔值，指示“双击缩放”交互是否处于激活状态，即当前正在使用.
      *
-     * @returns {boolean} `true` if the "double click to zoom" interaction is active.
+     * @返回 {boolean} `true` 如果“双击缩放”交互处于激活状态.
      */
     isActive() {
         return !!this._active;
     }
 
     /**
-     * Enables the "double click to zoom" interaction.
+     * 启用“双击缩放”交互.
      *
-     * @example
+     * @代码样例
      * map.doubleClickZoom.enable();
      */
     enable() {
@@ -57,9 +57,9 @@ class DoubleClickZoomHandler {
     }
 
     /**
-     * Disables the "double click to zoom" interaction.
+     * 禁用“双击缩放”交互.
      *
-     * @example
+     * @代码样例
      * map.doubleClickZoom.disable();
      */
     disable() {

@@ -1,6 +1,6 @@
 /*---
-title: Add a raster tile source
-description: Using a Mapbox raster tile source in a map
+title: 增加栅格切片来源
+description: 在地图中使用Mapbox栅格切片来源
 tags:
   - sources
 pathname: /mapbox-gl-js/example/map-tiles/

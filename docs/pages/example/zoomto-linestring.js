@@ -1,10 +1,10 @@
 /*---
-title: Fit to the bounds of a LineString
+title: 匹配LineString的边界
 description: >-
-  Get the bounds of a LineString by passing its first coordinates to
+  通过将第一个坐标传递给
   [`LngLatBounds`](/mapbox-gl-js/api/#lnglatbounds)
-  and chaining [`extend`](/mapbox-gl-js/api/#lnglatbounds#extend)
-  to include the last coordinates.
+  并链接 [`extend`](/mapbox-gl-js/api/#lnglatbounds#extend)
+  以包含最后一个坐标来获取LineString的边界。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/zoomto-linestring/

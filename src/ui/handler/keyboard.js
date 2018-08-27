@@ -9,18 +9,18 @@ const panStep = 100,
     pitchStep = 10;
 
 /**
- * The `KeyboardHandler` allows the user to zoom, rotate, and pan the map using
- * the following keyboard shortcuts:
+ * `KeyboardHandler` 允许用户通过以下键盘快捷键缩放、旋转和漫游地图:
+ * 
  *
- * - `=` / `+`: Increase the zoom level by 1.
- * - `Shift-=` / `Shift-+`: Increase the zoom level by 2.
- * - `-`: Decrease the zoom level by 1.
- * - `Shift--`: Decrease the zoom level by 2.
- * - Arrow keys: Pan by 100 pixels.
- * - `Shift+⇢`: Increase the rotation by 15 degrees.
- * - `Shift+⇠`: Decrease the rotation by 15 degrees.
- * - `Shift+⇡`: Increase the pitch by 10 degrees.
- * - `Shift+⇣`: Decrease the pitch by 10 degrees.
+ * - `=` / `+`: 缩放等级加1.
+ * - `Shift-=` / `Shift-+`: 缩放等级加2.
+ * - `-`: 缩放等级减1.
+ * - `Shift--`: 缩放等级减2.
+ * - Arrow keys: 漫游100个像素.
+ * - `Shift+⇢`: 增加15度的旋转.
+ * - `Shift+⇠`: 减少15度的旋转.
+ * - `Shift+⇡`: 增加10度的仰俯角.
+ * - `Shift+⇣`: 减少10度的仰俯角.
  */
 class KeyboardHandler {
     _map: Map;
@@ -40,18 +40,18 @@ class KeyboardHandler {
     }
 
     /**
-     * Returns a Boolean indicating whether keyboard interaction is enabled.
+     * 返回一个布尔值，指示是否启用了键盘交互.
      *
-     * @returns {boolean} `true` if keyboard interaction is enabled.
+     * @返回 {boolean} `true` 如果启用了键盘交互.
      */
     isEnabled() {
         return !!this._enabled;
     }
 
     /**
-     * Enables keyboard interaction.
+     * 启用键盘交互.
      *
-     * @example
+     * @代码样例
      * map.keyboard.enable();
      */
     enable() {
@@ -61,9 +61,9 @@ class KeyboardHandler {
     }
 
     /**
-     * Disables keyboard interaction.
+     * 禁用键盘交互.
      *
-     * @example
+     * @代码样例
      * map.keyboard.disable();
      */
     disable() {

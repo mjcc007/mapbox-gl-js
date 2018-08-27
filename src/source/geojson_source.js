@@ -15,8 +15,8 @@ import type {Callback} from '../types/callback';
 import type {PerformanceResourceTiming} from '../types/performance_resource_timing';
 
 /**
- * A source containing GeoJSON.
- * (See the [Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#sources-geojson) for detailed documentation of options.)
+ * 包含GeoJSON的数据源。
+ * （具体选项设置请参考 [样式规范](https://www.mapbox.com/mapbox-gl-style-spec/#sources-geojson)。）
  *
  * @example
  * map.addSource('some id', {
@@ -166,9 +166,9 @@ class GeoJSONSource extends Evented implements Source {
     }
 
     /**
-     * Sets the GeoJSON data and re-renders the map.
+     * 设置GeoJSON数据并重绘地图。
      *
-     * @param {Object|string} data A GeoJSON data object or a URL to one. The latter is preferable in the case of large GeoJSON files.
+     * @param {Object|string} data GeoJSON数据对象或者指向该对象的URL。对于较大的GeoJSON文件推荐使用URL的方式。
      * @returns {GeoJSONSource} this
      */
     setData(data: GeoJSON | string) {
@@ -192,10 +192,10 @@ class GeoJSONSource extends Evented implements Source {
     }
 
     /**
-     * For clustered sources, fetches the zoom at which the given cluster expands.
+     * 对于可聚集的数据源，获取给定聚集簇的缩放层级。
      *
-     * @param clusterId The value of the cluster's `cluster_id` property.
-     * @param callback A callback to be called when the zoom value is retrieved (`(error, zoom) => { ... }`).
+     * @param clusterId 给定聚集簇的 `cluster_id` 属性值。
+     * @param callback 缩放层级值返回后将会执行的回调函数 (`(error, zoom) => { ... }`)。
      * @returns {GeoJSONSource} this
      */
     getClusterExpansionZoom(clusterId: number, callback: Callback<number>) {
@@ -204,10 +204,10 @@ class GeoJSONSource extends Evented implements Source {
     }
 
     /**
-     * For clustered sources, fetches the children of the given cluster on the next zoom level (as an array of GeoJSON features).
+     * 对于可聚集的数据源，获取给定聚集簇在下一层级的子聚集簇（以GeoJSON feature数组的形式）。
      *
-     * @param clusterId The value of the cluster's `cluster_id` property.
-     * @param callback A callback to be called when the features are retrieved (`(error, features) => { ... }`).
+     * @param clusterId 给定聚集簇的 `cluster_id` 属性值。
+     * @param callback feature数组返回后将会执行的回调函数 (`(error, features) => { ... }`)。
      * @returns {GeoJSONSource} this
      */
     getClusterChildren(clusterId: number, callback: Callback<Array<GeoJSONFeature>>) {
@@ -216,12 +216,12 @@ class GeoJSONSource extends Evented implements Source {
     }
 
     /**
-     * For clustered sources, fetches the original points that belong to the cluster (as an array of GeoJSON features).
+     * 对于可聚集的数据源，获取给定聚集簇的所有原始点集合（以GeoJSON feature数组的形式）。
      *
-     * @param clusterId The value of the cluster's `cluster_id` property.
-     * @param limit The maximum number of features to return.
-     * @param offset The number of features to skip (e.g. for pagination).
-     * @param callback A callback to be called when the features are retrieved (`(error, features) => { ... }`).
+     * @param clusterId 给定聚集簇的 `cluster_id` 属性值。
+     * @param limit 返回集合中包含点的最大个数。
+     * @param offset 返回集合将跳过的点的数量（例如可用于分页）。
+     * @param callback feature数组返回后将会执行的回调函数 (`(error, features) => { ... }`)。
      * @returns {GeoJSONSource} this
      */
     getClusterLeaves(clusterId: number, limit: number, offset: number, callback: Callback<Array<GeoJSONFeature>>) {

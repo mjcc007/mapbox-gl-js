@@ -4,22 +4,21 @@ import { wrap } from '../util/util';
 import LngLatBounds from './lng_lat_bounds';
 
 /**
- * A `LngLat` object represents a given longitude and latitude coordinate, measured in degrees.
+ * 一个`LngLat`对象代表着已给定的经度和维度坐标, 以度为衡量单位.
  *
- * Mapbox GL uses longitude, latitude coordinate order (as opposed to latitude, longitude) to match GeoJSON.
+ * Mapbox GL使用先经度、再纬度的坐标显示方式 (与先纬度、再经度相反) ，以配合GeoJSON的应用.
  *
- * Note that any Mapbox GL method that accepts a `LngLat` object as an argument or option
- * can also accept an `Array` of two numbers and will perform an implicit conversion.
- * This flexible type is documented as {@link LngLatLike}.
+ * 可以注意到，Mapbox GL方法既可接收`LngLat`对象形式的声明，也可接收包含两个数值的数组，并直接对其进行隐式转换.
+ * 这种灵活的的接收方法可以在 {@link LngLatLike}文档部分找到说明.
  *
- * @param {number} lng Longitude, measured in degrees.
- * @param {number} lat Latitude, measured in degrees.
+ * @param {number} lng 经度, 以度为衡量单位.
+ * @param {number} lat 纬度, 以度为衡量单位.
  * @example
  * var ll = new mapboxgl.LngLat(-73.9749, 40.7736);
- * @see [Get coordinates of the mouse pointer](https://www.mapbox.com/mapbox-gl-js/example/mouse-position/)
- * @see [Display a popup](https://www.mapbox.com/mapbox-gl-js/example/popup/)
- * @see [Highlight features within a bounding box](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
- * @see [Create a timeline animation](https://www.mapbox.com/mapbox-gl-js/example/timeline-animation/)
+ * @see [得到鼠标箭头指针的坐标](https://www.mapbox.com/mapbox-gl-js/example/mouse-position/)
+ * @see [呈现弹出框效果](https://www.mapbox.com/mapbox-gl-js/example/popup/)
+ * @see [突出显示一个边界框内的某些区域特征](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
+ * @see [创建一个动态时间轴](https://www.mapbox.com/mapbox-gl-js/example/timeline-animation/)
  */
 class LngLat {
     lng: number;
@@ -37,9 +36,9 @@ class LngLat {
     }
 
     /**
-     * Returns a new `LngLat` object whose longitude is wrapped to the range (-180, 180).
+     * 返回一个新的`LngLat`对象，其经度范围被限定为(-180, 180).
      *
-     * @returns {LngLat} The wrapped `LngLat` object.
+     * @returns {LngLat} 指定的`LngLat`对象.
      * @example
      * var ll = new mapboxgl.LngLat(286.0251, 40.7736);
      * var wrapped = ll.wrap();
@@ -50,9 +49,9 @@ class LngLat {
     }
 
     /**
-     * Returns the coordinates represented as an array of two numbers.
+     * 返回以数组形式显示的一组坐标信息.
      *
-     * @returns {Array<number>} The coordinates represeted as an array of longitude and latitude.
+     * @returns {Array<number>} 坐标以包含着经度和纬度坐标的数组形式呈现.
      * @example
      * var ll = new mapboxgl.LngLat(-73.9749, 40.7736);
      * ll.toArray(); // = [-73.9749, 40.7736]
@@ -62,9 +61,9 @@ class LngLat {
     }
 
     /**
-     * Returns the coordinates represent as a string.
+     * 返回一组字符串形式的坐标信息.
      *
-     * @returns {string} The coordinates represented as a string of the format `'LngLat(lng, lat)'`.
+     * @returns {string} 坐标信息以此类字符串格式返回 `'LngLat(lng, lat)'`.
      * @example
      * var ll = new mapboxgl.LngLat(-73.9749, 40.7736);
      * ll.toString(); // = "LngLat(-73.9749, 40.7736)"
@@ -74,10 +73,10 @@ class LngLat {
     }
 
     /**
-     * Returns a `LngLatBounds` from the coordinates extended by a given `radius`.
+     * 根据指定的距离参数 `radius`扩展坐标，并返回一个 `LngLatBounds`.
      *
-     * @param {number} radius Distance in meters from the coordinates to extend the bounds.
-     * @returns {LngLatBounds} A new `LngLatBounds` object representing the coordinates extended by the `radius`.
+     * @param {number} radius 以米为单位，从原有坐标向外扩展的距离.
+     * @returns {LngLatBounds} 通过`radius`参数从原有坐标扩展得到一个新的`LngLatBounds`对象.
      * @example
      * var ll = new mapboxgl.LngLat(-73.9749, 40.7736);
      * ll.toBounds(100).toArray(); // = [[-73.97501862141328, 40.77351016847229], [-73.97478137858673, 40.77368983152771]]
@@ -92,12 +91,12 @@ class LngLat {
     }
 
     /**
-     * Converts an array of two numbers to a `LngLat` object.
+     * 把包含着两个坐标数值的数组 转化为一个`LngLat`对象.
      *
-     * If a `LngLat` object is passed in, the function returns it unchanged.
+     * 如果本身传入的就是`LngLat`对象, 此方法会把传入的参数值保持原样返回
      *
-     * @param {LngLatLike} input An array of two numbers to convert, or a `LngLat` object to return.
-     * @returns {LngLat} A new `LngLat` object, if a conversion occurred, or the original `LngLat` object.
+     * @param {LngLatLike} 传入一个需转换的数组, 或一个无需转换的`LngLat`对象.
+     * @returns {LngLat} 如方法执行，则会返回一个新的`LngLat`对象，或是原有传入的未转换`LngLat`对象.
      * @example
      * var arr = [-73.9749, 40.7736];
      * var ll = mapboxgl.LngLat.convert(arr);
@@ -118,8 +117,8 @@ class LngLat {
 }
 
 /**
- * A {@link LngLat} object, an array of two numbers representing longitude and latitude,
- * or an object with `lng` and `lat` properties.
+ * 可能是一个 {@link LngLat} object, 对象, 一个包含着两个数值(分别为经纬度)的数组,
+ * 亦或是一个包含着两个名为`lng`和`lat`变量值的对象.
  *
  * @typedef {LngLat | {lng: number, lat: number} | [number, number]} LngLatLike
  * @example

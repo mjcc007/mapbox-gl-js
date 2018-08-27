@@ -1,10 +1,10 @@
 /*---
-title: Get features under the mouse pointer
+title: 获取鼠标指针下的要素
 description: >-
-  Using [`queryRenderedFeatures`](/mapbox-gl-js/api/#map#queryrenderedfeatures)
-  to show properties of hovered-over map elements.
+  使用 [`查询已渲染的要素`](/mapbox-gl-js/api/#map#queryrenderedfeatures)
+  来显示悬停处的地图元素属性。
 tags:
-  - user-interaction
+  - 用户交互
 pathname: /mapbox-gl-js/example/queryrenderedfeatures/
 ---*/
 import Example from '../../components/example';

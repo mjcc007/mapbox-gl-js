@@ -18,8 +18,7 @@ const inertiaLinearity = 0.25,
     inertiaDeceleration = 720; // deg/s^2
 
 /**
- * The `DragRotateHandler` allows the user to rotate the map by clicking and
- * dragging the cursor while holding the right mouse button or `ctrl` key.
+ * `DragRotateHandler` 允许用户通过点击并拖拽光标（同时按住鼠标右键或 `ctrl` 键）来旋转地图
  */
 class DragRotateHandler {
     _map: Map;
@@ -38,11 +37,10 @@ class DragRotateHandler {
     _frameId: ?TaskID;
 
     /**
-     * @param {Map} map The Mapbox GL JS map to add the handler to.
+     * @param {Map} 需要添加此模块的 Mapbox GL JS 地图
      * @param {Object} [options]
-     * @param {number} [options.bearingSnap] The threshold, measured in degrees, that determines when the map's
-     *   bearing will snap to north.
-     * @param {bool} [options.pitchWithRotate=true] Control the map pitch in addition to the bearing
+     * @param {number} [options.bearingSnap] 以度为单位的阈值，确定地图方向在什么程度内会自动归为正北
+     * @param {bool} [options.pitchWithRotate=true] 是否允许用户以转轴为中心调整地图倾斜程度
      * @private
      */
     constructor(map: Map, options: {
@@ -68,25 +66,25 @@ class DragRotateHandler {
     }
 
     /**
-     * Returns a Boolean indicating whether the "drag to rotate" interaction is enabled.
+     * 返回一个布尔值，用于指示是否启用“拖动旋转”的交互功能。
      *
-     * @returns {boolean} `true` if the "drag to rotate" interaction is enabled.
+     * @returns {boolean} `true` 当“拖动旋转”的功能可用。
      */
     isEnabled() {
         return this._state !== 'disabled';
     }
 
     /**
-     * Returns a Boolean indicating whether the "drag to rotate" interaction is active, i.e. currently being used.
+     * 返回一个布尔值，指示“拖动旋转”的交互功能是否生效，即，当前正在使用。
      *
-     * @returns {boolean} `true` if the "drag to rotate" interaction is active.
+     * @returns {boolean} `true` 当“拖动旋转”的功能是起效的。
      */
     isActive() {
         return this._state === 'active';
     }
 
     /**
-     * Enables the "drag to rotate" interaction.
+     * 启用“拖动旋转”交互。
      *
      * @example
      * map.dragRotate.enable();
@@ -97,7 +95,7 @@ class DragRotateHandler {
     }
 
     /**
-     * Disables the "drag to rotate" interaction.
+     * 停用“拖动旋转”交互。
      *
      * @example
      * map.dragRotate.disable();

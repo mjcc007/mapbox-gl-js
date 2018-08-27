@@ -146,10 +146,10 @@ function forwardGeocoder(query) {
     var matchingFeatures = [];
     for (var i = 0; i < customData.features.length; i++) {
         var feature = customData.features[i];
-        // handle queries with different capitalization than the source data by calling toLowerCase()
+        // 通过调用 toLowerCase() 函数处理查询体中与源数据不一致的大写字母
         if (feature.properties.title.toLowerCase().search(query.toLowerCase()) !== -1) {
-            // add a tree emoji as a prefix for custom data results
-            // using carmen geojson format: https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+            // 为自定义数据结果添加一个树 emoji 前缀
+            // 使用 carmen geojson 格式： https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
             feature['place_name'] = '🌲 ' + feature.properties.title;
             feature['center'] = feature.geometry.coordinates;
             feature['place_type'] = ['park'];

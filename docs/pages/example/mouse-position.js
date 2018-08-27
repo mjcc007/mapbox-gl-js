@@ -1,8 +1,7 @@
 /*---
-title: Get coordinates of the mouse pointer
+title: 获取鼠标处的坐标信息
 description: >-
-  Showing mouse position on hover with pixel and latitude and longitude
-  coordinates
+  在悬停时显示鼠标位置处的经纬度坐标
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/mouse-position/

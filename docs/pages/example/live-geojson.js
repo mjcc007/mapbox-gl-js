@@ -1,6 +1,6 @@
 /*---
-title: Add live realtime data
-description: Use realtime GeoJSON data streams to move a [`symbol`](/mapbox-gl-js/style-spec#layers-symbol) on your map
+title: 加入实时数据
+description: 使用实时GeoJSON信息流数据移动地图上的标记
 tags:
   - sources
 pathname: /mapbox-gl-js/example/live-geojson/

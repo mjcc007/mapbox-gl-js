@@ -26,7 +26,7 @@ const wheelZoomRate = 1 / 450;
 const maxScalePerFrame = 2;
 
 /**
- * The `ScrollZoomHandler` allows the user to zoom the map by scrolling.
+ * ScrollZoomHandler 让用户能够通过滚轮来缩放地图。
  */
 class ScrollZoomHandler {
     _map: Map;
@@ -70,9 +70,9 @@ class ScrollZoomHandler {
     }
 
     /**
-     * Returns a Boolean indicating whether the "scroll to zoom" interaction is enabled.
+     * 返回一个指示“滚动缩放”交互是否激活的布尔值。
      *
-     * @returns {boolean} `true` if the "scroll to zoom" interaction is enabled.
+     * @returns {boolean} 如果“滚动缩放”交互已激活，为 true 。
      */
     isEnabled() {
         return !!this._enabled;
@@ -83,10 +83,10 @@ class ScrollZoomHandler {
     }
 
     /**
-     * Enables the "scroll to zoom" interaction.
+     * 激活“滚动缩放”交互功能。
      *
      * @param {Object} [options]
-     * @param {string} [options.around] If "center" is passed, map will zoom around center of map
+     * @param {string} [options.around] 如果传递了“center”，将在地图中心周围缩放。
      *
      * @example
      *   map.scrollZoom.enable();
@@ -100,7 +100,7 @@ class ScrollZoomHandler {
     }
 
     /**
-     * Disables the "scroll to zoom" interaction.
+     * 禁用“滚动缩放”交互功能。
      *
      * @example
      *   map.scrollZoom.disable();

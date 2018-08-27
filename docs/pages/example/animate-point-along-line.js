@@ -1,6 +1,6 @@
 /*---
-title: Animate a point
-description: Animate the position of a point by updating a GeoJSON source on each frame.
+title: 动态描绘地图路线上的点
+description: 通过更新每个框架上的GeoJSON资源，来动态显示地图上点的位置。
 tags:
   - layers
   - sources

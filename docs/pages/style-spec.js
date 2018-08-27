@@ -428,31 +428,25 @@ export default class extends React.Component {
                     <div className='contain margin3 col9'>
                         <div className='prose'>
                             <h1>{meta.title}</h1>
-                            <p>A Mapbox style is a document that defines the visual appearance of a map: what data to
-                                draw, the order to draw it in, and how to style the data when drawing it. A style
-                                document is a <a href="http://www.json.org/">JSON</a> object with specific root level
-                                and nested properties. This specification defines and describes these properties.</p>
-                            <p>The intended audience of this specification includes:</p>
+                            <p>Mapbox 样式是确定地图的文件：画地图用的数据，画地图的顺序，以及地图的样式。样式文件为<a href="http://www.json.org/">JSON</a>物体带特定的根级和嵌套的属性。该规范确定这些属性。
+                            </p>
+                            <p>该属性的目标受众包括：</p>
                             <ul>
-                                <li>Advanced designers and cartographers who want to write styles by hand rather
-                                    than use <a href='https://www.mapbox.com/studio'>Mapbox Studio</a></li>
-                                <li>Developers using style-related features of <a
-                                    href='https://www.mapbox.com/mapbox-gl-js/'>Mapbox GL JS</a> or the <a
-                                    href='https://www.mapbox.com/android-sdk/'>Mapbox Maps SDK for Android</a></li>
-                                <li>Authors of software that generates or processes Mapbox styles.</li>
+                                <li>资深设计师和地图设计师想手工绘制地图样式，而不是用 <a href='https://www.mapbox.com/studio'>Mapbox Studio</a></li>
+                                <li>利用 <a
+                                    href='https://www.mapbox.com/mapbox-gl-js/'>Mapbox GL JS</a> 或 <a
+                                    href='https://www.mapbox.com/android-sdk/'>Mapbox Maps SDK for Android</a>样式特点的地图开发者</li>
+                                <li>生成或处理Mapbox样式的软件作者</li>
                             </ul>
-                            <p>Developers using the <a href='https://www.mapbox.com/ios-sdk/'>Mapbox Maps SDK for iOS</a> or <a
+                            <p> 使用 <a href='https://www.mapbox.com/ios-sdk/'>Mapbox Maps SDK for iOS</a> 或 <a
                                 href='https://github.com/mapbox/mapbox-gl-native/tree/master/platform/macos/'>
-                                Mapbox Maps SDK for macOS</a> should consult the iOS SDK API reference for platform-appropriate
-                                documentation of style-related features.</p>
+                                Mapbox Maps SDK for macOS</a> 的开发者应参考 iOS SDK API ，确定适合平台文档的样式特点。</p>
                         </div>
 
                         <div className='prose'>
                             <a id='root' className='anchor'/>
-                            <h2><a href='#root' title='link to root'>Root Properties</a></h2>
-                            <p>Root level properties of a Mapbox style specify the map's layers, tile sources and other
-                                resources, and default values for the initial camera position when not specified
-                                elsewhere.</p>
+                            <h2><a href='#root' title='link to root'>根的属性</a></h2>
+                            <p>Mapbox样式的根级属性指定地图的层级、名称来源和其他来源，并在其他地方未指定初始摄像机位置时确定默认值。</p>
                             <div className='space-bottom1 clearfix'>
                                 {highlightJSON(`
                                 {
@@ -490,7 +484,7 @@ export default class extends React.Component {
                             <a id='sources' className='anchor'/>
                             <h2><a href='#sources' title='link to sources'>Sources</a></h2>
                             <p>
-                                Sources supply data to be shown on the map. The type of source is specified by the
+                                Sources提供了地图的数据来源。The type of source is specified by the
                                 <code>"type"</code> property, and must be one of {sourceTypes.map((t, i) => <var key={i}>{t}</var>).reduce((prev, curr) => [prev, ', ', curr])}.
                                 Adding a source
                                 won't immediately make data appear on the map because sources don't contain

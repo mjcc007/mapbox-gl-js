@@ -17,8 +17,7 @@ const inertiaLinearity = 0.3,
     inertiaDeceleration = 2500; // px/s^2
 
 /**
- * The `DragPanHandler` allows the user to pan the map by clicking and dragging
- * the cursor.
+ * `DragPanHandler` 允许用户通过点击并拖拽光标来平移地图。
  */
 class DragPanHandler {
     _map: Map;
@@ -53,25 +52,25 @@ class DragPanHandler {
     }
 
     /**
-     * Returns a Boolean indicating whether the "drag to pan" interaction is enabled.
+     * 返回一个布尔值，用于指示是否启用“拖动平移”的交互功能。
      *
-     * @returns {boolean} `true` if the "drag to pan" interaction is enabled.
+     * @returns {boolean} `true` 当“拖动平移”的功能可用。
      */
     isEnabled() {
         return this._state !== 'disabled';
     }
 
     /**
-     * Returns a Boolean indicating whether the "drag to pan" interaction is active, i.e. currently being used.
+     * 返回一个布尔值，指示“拖动平移”的交互功能是否生效，即，当前正在使用。
      *
-     * @returns {boolean} `true` if the "drag to pan" interaction is active.
+     * @returns {boolean} `true` 当“拖动平移”的功能是起效的。
      */
     isActive() {
         return this._state === 'active';
     }
 
     /**
-     * Enables the "drag to pan" interaction.
+     * 启用“拖动平移”交互。
      *
      * @example
      * map.dragPan.enable();
@@ -83,7 +82,7 @@ class DragPanHandler {
     }
 
     /**
-     * Disables the "drag to pan" interaction.
+     * 停用“拖动平移”交互。
      *
      * @example
      * map.dragPan.disable();
@@ -176,7 +175,7 @@ class DragPanHandler {
     }
 
     /**
-     * Called in each render frame while dragging is happening.
+     * 当发生拖动时，在每个渲染帧中调用
      * @private
      */
     _onDragFrame() {

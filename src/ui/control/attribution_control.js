@@ -11,11 +11,11 @@ type Options = {
 };
 
 /**
- * An `AttributionControl` control presents the map's [attribution information](https://www.mapbox.com/help/attribution/).
+ * 一个 `AttributionControl` 工具展示了地图的 [属性信息](https://www.mapbox.com/help/attribution/).
  *
  * @implements {IControl}
  * @param {Object} [options]
- * @param {boolean} [options.compact] If `true` force a compact attribution that shows the full attribution on mouse hover, or if `false` force the full attribution control. The default is a responsive attribution that collapses when the map is less than 640 pixels wide.
+ * @param {boolean} [options.compact] 若为 `true` 则显示属性缩略图标，鼠标悬浮时显示详细的地图属性信息，若为 `false` 则显示详细的属性信息。默认地图属性为响应式展示方式：当地图宽度小于640像素时属性收起。收起.
  * @example
  * var map = new mapboxgl.Map({attributionControl: false})
  *     .addControl(new mapboxgl.AttributionControl({

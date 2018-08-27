@@ -1,9 +1,8 @@
 /*---
-title: Limit geocoder results to a named region
+title: 限制地理搜索结果在一个指定的区域内
 description: >-
-  Use the [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
-  control to search for places using Mapbox Geocoding API limiting results
-  to a region.
+  使用 [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
+  控件和 Mapbox Geocoding API 搜索地理位置，并限制搜索结果在一个区域内。
 tags:
   - geocoder
 pathname: /mapbox-gl-js/example/mapbox-gl-geocoder-limit-region/

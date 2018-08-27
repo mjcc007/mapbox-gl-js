@@ -1,6 +1,6 @@
 /*---
-title: Select features around a clicked point
-description: Click on the map to query features using [`queryRenderedFeatures`](/mapbox-gl-js/api#map#queryrenderedfeatures).
+title: 识别单击点的要素
+description: 单击地图上的点以使用[`queryRenderedFeatures`](/mapbox-gl-js/api#map#queryrenderedfeatures)识别其要素特征。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/queryrenderedfeatures-around-point/

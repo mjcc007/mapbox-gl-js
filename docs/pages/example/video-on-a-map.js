@@ -1,6 +1,6 @@
 /*---
-title: Add a video
-description: Satellite raster baselayer with video on top
+title: 加入视频
+description: 带有视频的卫星栅格图层
 tags:
   - sources
   - layers

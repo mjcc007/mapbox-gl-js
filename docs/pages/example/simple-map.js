@@ -1,6 +1,6 @@
 /*---
-title: Display a map
-description: Initialize a map in an HTML element with Mapbox GL JS.
+title: 地图展示
+description: 在HTML元素中用Mapbox GL JS将地图初始化。
 tags:
   - styles
 pathname: /mapbox-gl-js/example/simple-map/

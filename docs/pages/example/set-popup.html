@@ -27,18 +27,18 @@ var map = new mapboxgl.Map({
     zoom: 15
 });
 
-// create the popup
+// 创建信息提示框
 var popup = new mapboxgl.Popup({ offset: 25 })
     .setText('Construction on the Washington Monument began in 1848.');
 
-// create DOM element for the marker
+// 为覆盖物创建DOM元素
 var el = document.createElement('div');
 el.id = 'marker';
 
-// create the marker
+// 创建覆盖物
 new mapboxgl.Marker(el)
     .setLngLat(monument)
-    .setPopup(popup) // sets a popup on this marker
+    .setPopup(popup) // 在此覆盖物上绑定一个信息提示框
     .addTo(map);
 
 </script>

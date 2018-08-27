@@ -1,6 +1,6 @@
 /*---
-title: Draw GeoJSON points
-description: Draw points from a GeoJSON collection to a map.
+title: 绘制GeoJSON点
+description: 将一个GeoJSON集合中的点绘制到地图上.
 tags:
   - layers
 pathname: /mapbox-gl-js/example/geojson-markers/

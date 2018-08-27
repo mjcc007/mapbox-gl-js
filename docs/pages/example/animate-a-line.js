@@ -1,6 +1,6 @@
 /*---
-title: Animate a line
-description: Animate a line by updating a GeoJSON source on each frame.
+title: 动态描绘地图上的路线
+description: 通过更新每个框架上GeoJSON资源来实现动态展示地图上的路线。
 tags:
   - layers
   - sources

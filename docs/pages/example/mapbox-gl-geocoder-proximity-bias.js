@@ -1,9 +1,8 @@
 /*---
-title: Bias geocoder results around the map view
+title: 在地图视角中偏向于地理编码器搜索结果
 description: >-
-  Use the [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
-  control to search for places using Mapbox Geocoding API biasing results
-  nearby the map's current view.
+  使用 [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
+  控件，使用 Mapbox 的地理编码API来搜索位置，使地图当前视角偏向于搜索结果
 tags:
   - geocoder
 pathname: /mapbox-gl-js/example/mapbox-gl-geocoder-proximity-bias/

@@ -1,10 +1,9 @@
 /*---
-title: Supplement forward geocoding search results from another data source
+title: 从别的数据源增补地理搜索结果
 description: >-
-  Use the [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
-  control to search for places using Mapbox Geocoding API, supplementing
-  results from a local data source or function, in this case to match
-  Chicago Park names with text input.
+  使用 [mapbox-gl-geocoder](https://github.com/mapbox/mapbox-gl-geocoder)
+  控件和 Mapbox Geocoding API 搜索地理位置，从本地的数据源或函数中向前增补搜索结果。 
+  本例子将匹配用户输入的芝加哥公园名称。
 tags:
   - geocoder
 pathname: /mapbox-gl-js/example/forward-geocode-custom-data/

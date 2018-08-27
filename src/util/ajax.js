@@ -6,7 +6,7 @@ import type { Callback } from '../types/callback';
 import type { Cancelable } from '../types/cancelable';
 
 /**
- * The type of a resource.
+ * 资源类型.
  * @private
  * @readonly
  * @enum {string}
@@ -28,11 +28,11 @@ if (typeof Object.freeze == 'function') {
 }
 
 /**
- * A `RequestParameters` object to be returned from Map.options.transformRequest callbacks.
+ * `RequestParameters`是使用Map.options.transformRequest方法后返回的请求参数.
  * @typedef {Object} RequestParameters
- * @property {string} url The URL to be requested.
- * @property {Object} headers The headers to be sent with the request.
- * @property {string} credentials `'same-origin'|'include'` Use 'include' to send cookies with cross-origin requests.
+ * @property {string} url 发送的请求路径.
+ * @property {Object} headers 整个请求的请求头.
+ * @property {string} credentials `'same-origin'|'include'` 需使用'include'发送带有身份验证的跨域请求.
  */
 export type RequestParameters = {
     url: string,

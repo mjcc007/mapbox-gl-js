@@ -1,6 +1,6 @@
 /*---
-title: Create and style clusters
-description: Use Mapbox GL JS' built-in functions to visualize points as clusters.
+title: 创建一个自定义风格的地点集群
+description: 使用Mapbox GL JS的内置功能，将地图上的点可视化为集群。
 tags:
   - layers
 pathname: /mapbox-gl-js/example/cluster/

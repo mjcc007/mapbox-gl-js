@@ -1,7 +1,7 @@
 /*---
-title: Highlight features within a bounding box
+title: 突出显示边界框内的要素
 description: >-
-  Hold the Shift key and drag the map to query features using [`queryRenderedFeatures`](/mapbox-gl-js/api/#map#queryrenderedfeatures).
+  按住Shift键并拖动地图来使用[`查询渲染过的要素`](/mapbox-gl-js/api/#map#queryrenderedfeatures)查询要素。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/using-box-queryrenderedfeatures/
