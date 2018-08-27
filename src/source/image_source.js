@@ -11,7 +11,7 @@ import browser from '../util/browser';
 import EXTENT from '../data/extent';
 import { RasterBoundsArray } from '../data/array_types';
 import rasterBoundsAttributes from '../data/raster_bounds_attributes';
-import VertexArrayObject from '../render/vertex_array_object';
+import SegmentVector from '../data/segment';
 import Texture from '../render/texture';
 
 import type {Source} from './source';
@@ -22,13 +22,17 @@ import type Tile from './tile';
 import type Coordinate from '../geo/coordinate';
 import type {Callback} from '../types/callback';
 import type VertexBuffer from '../gl/vertex_buffer';
+import type {
+    ImageSourceSpecification,
+    VideoSourceSpecification
+} from '../style-spec/types';
 
 /**
- * A data source containing an image.
- * (See the [Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#sources-image) for detailed documentation of options.)
+ * 包含图片的数据源.
+ * (点此查看可选项的细节文档.[Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#sources-image))
  *
- * @example
- * // add to map
+ * @例子
+ * // 添加到地图
  * map.addSource('some id', {
  *    type: 'image',
  *    url: 'https://www.mapbox.com/images/foo.png',
@@ -40,7 +44,7 @@ import type VertexBuffer from '../gl/vertex_buffer';
  *    ]
  * });
  *
- * // update
+ * // 更新
  * var mySource = map.getSource('some id');
  * mySource.setCoordinates([
  *     [-76.54335737228394, 39.18579907229748],
@@ -49,8 +53,8 @@ import type VertexBuffer from '../gl/vertex_buffer';
  *     [-76.54520273208618, 39.17876344106642]
  * ]);
  *
- * map.removeSource('some id');  // remove
- * @see [Add an image](https://www.mapbox.com/mapbox-gl-js/example/image-on-a-map/)
+ * map.removeSource('some id');  // 移除
+ * @见 [Add an image](https://www.mapbox.com/mapbox-gl-js/example/image-on-a-map/)
  */
 class ImageSource extends Evented implements Source {
     type: string;
@@ -71,10 +75,10 @@ class ImageSource extends Evented implements Source {
     tileID: CanonicalTileID;
     _boundsArray: RasterBoundsArray;
     boundsBuffer: VertexBuffer;
-    boundsVAO: VertexArrayObject;
+    boundsSegments: SegmentVector;
 
     /**
-     * @private
+     * @私有的
      */
     constructor(id: string, options: ImageSourceSpecification | VideoSourceSpecification | CanvasSourceSpecification, dispatcher: Dispatcher, eventedParent: Evented) {
         super();
@@ -121,13 +125,13 @@ class ImageSource extends Evented implements Source {
     }
 
     /**
-     * Sets the image's coordinates and re-renders the map.
+     * 设置图片的坐标，并重新渲染地图.
      *
-     * @param {Array<Array<number>>} coordinates Four geographical coordinates,
-     *   represented as arrays of longitude and latitude numbers, which define the corners of the image.
-     *   The coordinates start at the top left corner of the image and proceed in clockwise order.
-     *   They do not have to represent a rectangle.
-     * @returns {ImageSource} this
+     * @param {Array<Array<number>>} coordinates 四个地理坐标,
+     *   以经度和维度的数列方式，对图片的四个角做定义.
+     *   坐标从图片的左上角开始，并顺时针依次代表图片的其他角.
+     *   图片可以是除正方形以外的形状.
+     * @返回 {ImageSource} this
      */
     setCoordinates(coordinates: [[number, number], [number, number], [number, number], [number, number]]) {
         this.coordinates = coordinates;
@@ -193,8 +197,8 @@ class ImageSource extends Evented implements Source {
             this.boundsBuffer = context.createVertexBuffer(this._boundsArray, rasterBoundsAttributes.members);
         }
 
-        if (!this.boundsVAO) {
-            this.boundsVAO = new VertexArrayObject();
+        if (!this.boundsSegments) {
+            this.boundsSegments = SegmentVector.simpleSegment(0, 0, 4, 2);
         }
 
         if (!this.texture) {
