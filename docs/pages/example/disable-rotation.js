@@ -1,6 +1,6 @@
 /*---
-title: Disable map rotation
-description: Prevent users from rotating a map.
+title: 禁止地图旋转
+description: 防止用户旋转地图。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/disable-rotation/
