@@ -1,6 +1,6 @@
 /*---
-title: Center the map on a clicked symbol
-description: Using events and [`flyTo`](/mapbox-gl-js/api/#map#flyto) to center the map on a [`symbol`](/mapbox-gl-js/style-spec#layers-symbol)
+title: 将地图置于单击的符号上
+description: 使用事件和[`flyTo`]（/mapbox-gl-js/api/#map＃flyto）将地图置于[`symbol`]中心（/mapbox-gl-js/style-spec＃layers-symbol）
 tags:
   - camera
   - user-interaction
