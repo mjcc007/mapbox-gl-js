@@ -1,8 +1,8 @@
 /*---
-title: Animate 3D buildings based on ambient sounds
+title: 基于环境声音为3D建筑物制作动画
 description: >-
-  Connects the runtime styling API with the Web Audio API, creating a map where
-  the 3D buildings dance to the rhythm of your ambient environment.
+  将运行时样式API与Web Audio API连接，创建一个地图
+  3D建筑按照周围环境的节奏跳舞。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/dancing-buildings/
