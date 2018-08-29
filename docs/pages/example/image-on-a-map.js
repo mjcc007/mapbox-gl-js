@@ -1,6 +1,6 @@
 /*---
-title: Add an image
-description: Dark vector baselayer with radar weather image overlay
+title: 添加一张纹理图片
+description: 基线矢量暗纹理与天气影像图叠加
 tags:
   - sources
   - layers

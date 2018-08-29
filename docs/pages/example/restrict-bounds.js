@@ -1,7 +1,7 @@
 /*---
-title: Restrict map panning to an area
+title: 将地图平移限制在某个区域
 description: >-
-  Prevent a map from being panned to a different place by setting [`maxBounds`](https://www.mapbox.com/mapbox-gl-js/api#map#setmaxbounds).
+  设置[`最大边界`](https://www.mapbox.com/mapbox-gl-js/api#map#setmaxbounds)防止地图被平移至其他位置。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/restrict-bounds/

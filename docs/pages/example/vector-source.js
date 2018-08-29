@@ -1,6 +1,6 @@
 /*---
-title: Add a vector tile source
-description: Add a [vector source](/mapbox-gl-js/style-spec#sources-vector) to a map.
+title: 增加矢量切片源
+description: 地图增加矢量切片源
 tags:
   - sources
 pathname: /mapbox-gl-js/example/vector-source/

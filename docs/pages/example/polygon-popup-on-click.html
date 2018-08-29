@@ -14,7 +14,7 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function () {
-    // Add a layer showing the state polygons.
+    // 添加一个展示州形状的图层
     map.addLayer({
         'id': 'states-layer',
         'type': 'fill',
@@ -28,8 +28,7 @@ map.on('load', function () {
         }
     });
 
-    // When a click event occurs on a feature in the states layer, open a popup at the
-    // location of the click, with description HTML from its properties.
+    // 当在州图层上发生一个点击事件时，在点击位置上打开一个信息提示框，且提示框内容为其属性描述的HTML片段
     map.on('click', 'states-layer', function (e) {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
@@ -37,12 +36,12 @@ map.on('load', function () {
             .addTo(map);
     });
 
-    // Change the cursor to a pointer when the mouse is over the states layer.
+    // 当鼠标移动到州图层的上方时把光标变成指针
     map.on('mouseenter', 'states-layer', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
 
-    // Change it back to a pointer when it leaves.
+    // 当鼠标离开后恢复成原来状态
     map.on('mouseleave', 'states-layer', function () {
         map.getCanvas().style.cursor = '';
     });

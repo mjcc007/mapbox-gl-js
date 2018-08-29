@@ -1,6 +1,6 @@
 /*---
-title: Update a feature in realtime
-description: Change an existing feature on your map in realtime by updating its data
+title: 实时更新功能
+description: 通过实时更新数据改变已有地图功能
 tags:
   - sources
 pathname: /mapbox-gl-js/example/live-update-feature/

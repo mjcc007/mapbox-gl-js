@@ -1,6 +1,6 @@
 /*---
-title: Display a popup
-description: Add a [`Popup`](/mapbox-gl-js/api/#popup) to the map
+title: 展示一个信息提示框
+description: 添加一个信息提示框 [`Popup`](/mapbox-gl-js/api/#popup) 到地图上。
 tags:
   - controls-and-overlays
 pathname: /mapbox-gl-js/example/popup/

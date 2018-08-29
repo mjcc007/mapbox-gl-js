@@ -131,26 +131,22 @@ const defaultOptions = {
 };
 
 /**
- * The `Map` object represents the map on your page. It exposes methods
- * and properties that enable you to programmatically change the map,
- * and fires events as users interact with it.
+ * “Map”地图就是你在页面上的地图。它定义各种方法和属性使得你可以操控修改地图，
+ * 或者触发事件与地图交互。
  *
- * You create a `Map` by specifying a `container` and other options.
- * Then Mapbox GL JS initializes the map on the page and returns your `Map`
- * object.
+ * 你可以创建一个地图图像作为一个容器。然后 Mapbox GL JS会初始化页面上的地图同时返回你的“Map”对象。
  *
  * @extends Evented
  * @param {Object} options
- * @param {HTMLElement|string} options.container The HTML element in which Mapbox GL JS will render the map, or the element's string `id`. The specified element must have no children.
- * @param {number} [options.minZoom=0] The minimum zoom level of the map (0-24).
- * @param {number} [options.maxZoom=22] The maximum zoom level of the map (0-24).
- * @param {Object|string} [options.style] The map's Mapbox style. This must be an a JSON object conforming to
- * the schema described in the [Mapbox Style Specification](https://mapbox.com/mapbox-gl-style-spec/), or a URL to
- * such JSON.
+ * @param {HTMLElement|string} options.container Mapbox GL JS 绘制在地图上的 HTML 元素，或者是元素的“id”。这个元素不能含有子元素。
+ * @param {number} [options.minZoom=0] 地图的最小缩放级别 (0-24).
+ * @param {number} [options.maxZoom=22] 地图的最大缩放级别 (0-24).
+ * @param {Object|string} [options.style] 地图的 Mapbox 样式。它必须是JSON对象，要符合规范
+ * [Mapbox Style 规范](https://mapbox.com/mapbox-gl-style-spec/)，或者是一个JSON对象的URL地址。
  *
- * To load a style from the Mapbox API, you can use a URL of the form `mapbox://styles/:owner/:style`,
- * where `:owner` is your Mapbox account name and `:style` is the style ID. Or you can use one of the following
- * [the predefined Mapbox styles](https://www.mapbox.com/maps/):
+ * 从 Mapbox API加载样式，你可以使用`mapbox://styles/:owner/:style`表格中的URL，
+ * 其中`:owner`是你Mapbox的账户名称，`:style`是样式的ID。或者你可以使用下列样式之一
+ * [Mapbox 预定义样式](https://www.mapbox.com/maps/):
  *
  *  * `mapbox://styles/mapbox/streets-v10`
  *  * `mapbox://styles/mapbox/outdoors-v10`
@@ -163,47 +159,44 @@ const defaultOptions = {
  *  * `mapbox://styles/mapbox/navigation-guidance-day-v2`
  *  * `mapbox://styles/mapbox/navigation-guidance-night-v2`
  *
- * Tilesets hosted with Mapbox can be style-optimized if you append `?optimize=true` to the end of your style URL, like `mapbox://styles/mapbox/streets-v9?optimize=true`.
- * Learn more about style-optimized vector tiles in our [API documentation](https://www.mapbox.com/api-documentation/#retrieve-tiles).
+ * 如果你在样式的URL结尾加入`?optimize=true`，使用Mapbox的的瓦片可以被优化样式，例如`mapbox://styles/mapbox/streets-v9?optimize=true`。
+ * 学习更多矢量瓦片的样式优化方法[API 文档](https://www.mapbox.com/api-documentation/#retrieve-tiles)。
  *
- * @param {boolean} [options.hash=false] If `true`, the map's position (zoom, center latitude, center longitude, bearing, and pitch) will be synced with the hash fragment of the page's URL.
- *   For example, `http://path/to/my/page.html#2.59/39.26/53.07/-24.1/60`.
- * @param {boolean} [options.interactive=true] If `false`, no mouse, touch, or keyboard listeners will be attached to the map, so it will not respond to interaction.
- * @param {number} [options.bearingSnap=7] The threshold, measured in degrees, that determines when the map's
- *   bearing will snap to north. For example, with a `bearingSnap` of 7, if the user rotates
- *   the map within 7 degrees of north, the map will automatically snap to exact north.
- * @param {boolean} [options.pitchWithRotate=true] If `false`, the map's pitch (tilt) control with "drag to rotate" interaction will be disabled.
- * @param {number} [options.clickTolerance=3] The max number of pixels a user can shift the mouse pointer during a click for it to be considered a valid click (as opposed to a mouse drag).
- * @param {boolean} [options.attributionControl=true] If `true`, an {@link AttributionControl} will be added to the map.
- * @param {string} [options.logoPosition='bottom-left'] A string representing the position of the Mapbox wordmark on the map. Valid options are `top-left`,`top-right`, `bottom-left`, `bottom-right`.
- * @param {boolean} [options.failIfMajorPerformanceCaveat=false] If `true`, map creation will fail if the performance of Mapbox
- *   GL JS would be dramatically worse than expected (i.e. a software renderer would be used).
- * @param {boolean} [options.preserveDrawingBuffer=false] If `true`, the map's canvas can be exported to a PNG using `map.getCanvas().toDataURL()`. This is `false` by default as a performance optimization.
- * @param {boolean} [options.refreshExpiredTiles=true] If `false`, the map won't attempt to re-request tiles once they expire per their HTTP `cacheControl`/`expires` headers.
- * @param {LngLatBoundsLike} [options.maxBounds] If set, the map will be constrained to the given bounds.
- * @param {boolean|Object} [options.scrollZoom=true] If `true`, the "scroll to zoom" interaction is enabled. An `Object` value is passed as options to {@link ScrollZoomHandler#enable}.
- * @param {boolean} [options.boxZoom=true] If `true`, the "box zoom" interaction is enabled (see {@link BoxZoomHandler}).
- * @param {boolean} [options.dragRotate=true] If `true`, the "drag to rotate" interaction is enabled (see {@link DragRotateHandler}).
- * @param {boolean} [options.dragPan=true] If `true`, the "drag to pan" interaction is enabled (see {@link DragPanHandler}).
- * @param {boolean} [options.keyboard=true] If `true`, keyboard shortcuts are enabled (see {@link KeyboardHandler}).
- * @param {boolean} [options.doubleClickZoom=true] If `true`, the "double click to zoom" interaction is enabled (see {@link DoubleClickZoomHandler}).
- * @param {boolean|Object} [options.touchZoomRotate=true] If `true`, the "pinch to rotate and zoom" interaction is enabled. An `Object` value is passed as options to {@link TouchZoomRotateHandler#enable}.
- * @param {boolean} [options.trackResize=true]  If `true`, the map will automatically resize when the browser window resizes.
- * @param {LngLatLike} [options.center=[0, 0]] The inital geographical centerpoint of the map. If `center` is not specified in the constructor options, Mapbox GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to `[0, 0]` Note: Mapbox GL uses longitude, latitude coordinate order (as opposed to latitude, longitude) to match GeoJSON.
- * @param {number} [options.zoom=0] The initial zoom level of the map. If `zoom` is not specified in the constructor options, Mapbox GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to `0`.
- * @param {number} [options.bearing=0] The initial bearing (rotation) of the map, measured in degrees counter-clockwise from north. If `bearing` is not specified in the constructor options, Mapbox GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to `0`.
- * @param {number} [options.pitch=0] The initial pitch (tilt) of the map, measured in degrees away from the plane of the screen (0-60). If `pitch` is not specified in the constructor options, Mapbox GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to `0`.
- * @param {boolean} [options.renderWorldCopies=true]  If `true`, multiple copies of the world will be rendered, when zoomed out.
- * @param {number} [options.maxTileCacheSize=null]  The maximum number of tiles stored in the tile cache for a given source. If omitted, the cache will be dynamically sized based on the current viewport.
- * @param {string} [options.localIdeographFontFamily=null] If specified, defines a CSS font-family
- *   for locally overriding generation of glyphs in the 'CJK Unified Ideographs' and 'Hangul Syllables' ranges.
- *   In these ranges, font settings from the map's style will be ignored, except for font-weight keywords (light/regular/medium/bold).
- *   The purpose of this option is to avoid bandwidth-intensive glyph server requests. (see [Use locally generated ideographs](https://www.mapbox.com/mapbox-gl-js/example/local-ideographs))
- * @param {RequestTransformFunction} [options.transformRequest=null] A callback run before the Map makes a request for an external URL. The callback can be used to modify the url, set headers, or set the credentials property for cross-origin requests.
- *   Expected to return an object with a `url` property and optionally `headers` and `credentials` properties.
- * @param {boolean} [options.collectResourceTiming=false] If `true`, Resource Timing API information will be collected for requests made by GeoJSON and Vector Tile web workers (this information is normally inaccessible from the main Javascript thread). Information will be returned in a `resourceTiming` property of relevant `data` events.
- * @param {number} [options.fadeDuration=300] Controls the duration of the fade-in/fade-out animation for label collisions, in milliseconds. This setting affects all symbol layers. This setting does not affect the duration of runtime styling transitions or raster tile cross-fading.
- * @param {boolean} [options.crossSourceCollisions=true] If `true`, symbols from multiple sources can collide with each other during collision detection. If `false`, collision detection is run separately for the symbols in each source.
+ * @param {boolean} [options.hash=false] 如果是“true”，地图的位置（缩放，中心维度，中心经度，方位，和斜度）将与页面的URL片段同步。
+ *   例如, `http://path/to/my/page.html#2.59/39.26/53.07/-24.1/60`.
+ * @param {boolean} [options.interactive=true] 如果设置为“false”，地图上的鼠标，触摸或者键盘事件将不会被监听，没有交互事件。
+ * @param {number} [options.bearingSnap=7] 以度为单位的阈值，用于确定地图的方位何时会向北移动。
+ * 例如，当`bearingSnap`为7时，如果用户在7度以内旋转地图，地图将自动转向北方。
+ * @param {boolean} [options.pitchWithRotate=true] 如果为“false”，地图的倾斜控制“拖拽旋转”的交互事件监听将会被禁止。
+ * @param {number} [options.clickTolerance=3] 用户可以在单击期间移动鼠标指针的最大像素数，用来确定是否是有效点击（与鼠标拖动相反）。
+ * @param {boolean} [options.attributionControl=true] 如果为“true”，{@link AttributionControl}将会被添加到地图上。
+ * @param {string | Array<string>} [options.customAttribution] 在{@link AttributionControl}中显示的字符串或字符串数组。仅当`options.attributionControls`为'true`时才有效。
+ * @param {string} [options.logoPosition='bottom-left'] 设置地图上Mapbox水印的位置。有效的参数是：`top-left`,`top-right`, `bottom-left`, `bottom-right`
+ * @param {boolean} [options.failIfMajorPerformanceCaveat=false] 如果为'true`，假如Mapbox GL JS的性能将比预期的差（即使用软件渲染器），则地图创建将失败。
+ * @param {boolean} [options.preserveDrawingBuffer=false] 如果为`true`，当使用`map.getCanvas().toDataURL()`时地图的画布将会被导出成一张PNG图片。默认参数是`false`。
+ * @param {boolean} [options.refreshExpiredTiles=true] 如果是`false`，在地图瓦片的HTTP`cacheControl`/`expires`标头到期后地图将不会尝试重新请求连接。
+ * @param {LngLatBoundsLike} [options.maxBounds] 如果设置此参数，地图边界将限制在这个边界内。
+ * @param {boolean|Object} [options.scrollZoom=true] 如果为“true”，“滚动缩放”的交互事件监听将会被激活。对象值参考{@link ScrollZoomHandler#enable}。
+ * @param {boolean} [options.boxZoom=true] 如果为“true”，“矩形缩放”的交互事件监听将会被激活（参考 {@link BoxZoomHandler}）。
+ * @param {boolean} [options.dragRotate=true] 如果为“true”，“拖动旋转”的交互事件监听将会被激活 (参考 {@link DragRotateHandler})
+ * @param {boolean} [options.dragPan=true] 如果为“true”，“拖动平移”的交互事件监听将会被激活(参考 {@link DragPanHandler})。
+ * @param {boolean} [options.keyboard=true] 如果为“true”，键盘快捷键将会被激活 (参考 {@link KeyboardHandler})。
+ * @param {boolean} [options.doubleClickZoom=true] 如果为“true”，“双击缩放”的交互事件监听将会被激活 (参考 {@link DoubleClickZoomHandler})。
+ * @param {boolean|Object} [options.touchZoomRotate=true] 如果为“true”，“触摸缩放旋转”的交互事件监听将会被激活。对象值参考{@link TouchZoomRotateHandler#enable}。
+ * @param {boolean} [options.trackResize=true]  如果为“true”，当浏览器窗口改变大小时候地图自动重制大小。
+ * @param {LngLatLike} [options.center=[0, 0]] 初始化地图中地理中心。如果构造参数中没有设置中心坐标，Mapbox GL JS 将会在地图的样式参数中寻找。如果样式参数中也没有设置，系统会默认`[0, 0]`。注意：Mapbox GL使用的是经度，纬度（而不是纬度，经度）来匹配GeoJSON数据。
+ * @param {number} [options.zoom=0] 地图的初始化缩放级别。如果“zoom”在构造方法的参数中没有被设置，Mapbox GL JS 将会在地图的样式对象中查找。如果样式中也没有设置，那么默认值为“0”。
+ * @param {number} [options.bearing=0] 地图的初始化方位（旋转），以逆时针方向从北方向来计算，度为单位。如果“bearing”在构造方法的参数中没有被设置，Mapbox GL JS 将会在地图的样式对象中查找。如果样式中也没有设置，那么默认值为“0”。
+ * @param {number} [options.pitch=0] 地图的初始高度（倾斜），以远离屏幕平面（0～60）的度数来计算。如果“pitch”在构造方法的参数中没有被设置，Mapbox GL JS 将会在地图的样式对象中查找。如果样式中也没有设置，那么默认值为“0”。
+ * @param {boolean} [options.renderWorldCopies=true] 如果为“true”，当缩放时候这个世界的多个副本会被绘制。
+ * @param {number} [options.maxTileCacheSize=null]  资源的最大缓存瓦片数量。如果忽略设置，这个缓存会依据可视区域动态改变大小。
+ * @param {string} [options.localIdeographFontFamily=null] 如果指定，则定义CSS字体样式用来覆盖本地'CJK Unified Ideographs'和'Hangul Syllables'范围内字体的生成。
+ * 在这些范围内，地图样式中的字体设置将会被忽略，除了字体大小关键字(light/regular/medium/bold)。
+ * 此选项的目的是避免发送带宽密集型字形请求，(参考 [使用本地生成的字体](https://www.mapbox.com/mapbox-gl-js/example/local-ideographs))
+ * @param {RequestTransformFunction} [options.transformRequest=null] 地图在请求另外的URL的回调方法。这个回调方法可以修改url，设置头部，或者对请求进行跨域设置。预期的返回时是一个对象，包含`url`属性，`headers`属性和`credentials`属性。
+ * @param {boolean} [options.collectResourceTiming=false] 如果为“true”，资源计时API的信息将会被GeoJSON和矢量瓦片网页进程发出的请求收集（此信息通常无法从主Javascript线程获取）。信息将会通过相关`data`事件的`resourceTiming`属性返回。
+ * @param {number} [options.fadeDuration=300] 控制标签碰撞检测的淡入/淡出动画的持续时间（以毫秒为单位）。此设置会影响所有符号图层。此设置不会影响运行时样式转换或栅格图块交叉渐变的持续时间。
+ * @param {boolean} [options.crossSourceCollisions=true] 如果为“true”，则在碰撞检测期间，来自多个源的符号可能会相互冲突。如果为“false”，则对每个源中的符号单独运行碰撞检测。
  * @example
  * var map = new mapboxgl.Map({
  *   container: 'map',
@@ -221,7 +214,7 @@ const defaultOptions = {
  *     }
  *   }
  * });
- * @see [Display a map](https://www.mapbox.com/mapbox-gl-js/examples/)
+ * @see [展示地图](https://www.mapbox.com/mapbox-gl-js/examples/)
  */
 class Map extends Camera {
     style: Style;
@@ -259,39 +252,37 @@ class Map extends Camera {
     _renderTaskQueue: TaskQueue;
 
     /**
-     * The map's {@link ScrollZoomHandler}, which implements zooming in and out with a scroll wheel or trackpad.
+     * 地图的 {@link ScrollZoomHandler}，通过鼠标滚轮或者触摸板实现缩放。
      */
     scrollZoom: ScrollZoomHandler;
 
     /**
-     * The map's {@link BoxZoomHandler}, which implements zooming using a drag gesture with the Shift key pressed.
+     * 地图的{@link BoxZoomHandler}，通过按住Shift键结合拖拽手势实现缩放。
      */
     boxZoom: BoxZoomHandler;
 
     /**
-     * The map's {@link DragRotateHandler}, which implements rotating the map while dragging with the right
-     * mouse button or with the Control key pressed.
+     * 地图的{@link DragRotateHandler}，通过鼠标右键或者按住Control键旋转地图。
      */
     dragRotate: DragRotateHandler;
 
     /**
-     * The map's {@link DragPanHandler}, which implements dragging the map with a mouse or touch gesture.
+     * 地图的{@link DragPanHandler}，通过鼠标或触摸手势来拖动地图。
      */
     dragPan: DragPanHandler;
 
     /**
-     * The map's {@link KeyboardHandler}, which allows the user to zoom, rotate, and pan the map using keyboard
-     * shortcuts.
+     * 地图的 {@link KeyboardHandler}，允许用户通过键盘快捷键缩放，旋转和平移地图。
      */
     keyboard: KeyboardHandler;
 
     /**
-     * The map's {@link DoubleClickZoomHandler}, which allows the user to zoom by double clicking.
+     * 地图的 {@link DoubleClickZoomHandler}，允许用户通过双击实现缩放。
      */
     doubleClickZoom: DoubleClickZoomHandler;
 
     /**
-     * The map's {@link TouchZoomRotateHandler}, which allows the user to zoom or rotate the map with touch gestures.
+     * 地图的 {@link TouchZoomRotateHandler}，允许用户通过触摸手势缩放或者旋转地图。
      */
     touchZoomRotate: TouchZoomRotateHandler;
 
@@ -394,13 +385,15 @@ class Map extends Camera {
     }
 
     /**
-     * Adds a {@link IControl} to the map, calling `control.onAdd(this)`.
+     * 添加一个控制器 {@link IControl} 到地图上，回调方法“control.onAdd(this)”。
      *
-     * @param {IControl} control The {@link IControl} to add.
-     * @param {string} [position] position on the map to which the control will be added.
-     * Valid values are `'top-left'`, `'top-right'`, `'bottom-left'`, and `'bottom-right'`. Defaults to `'top-right'`.
+     * @param {IControl} control 被添加的控制器{@link IControl}。
+     * 
+     * @param {string} [position] position 控制器被添加到地图的位置。有效的参数列表是：
+     * `'top-left'`, `'top-right'`, `'bottom-left'`, 和 `'bottom-right'`. 默认值是 `'top-right'`。
+     * 
      * @returns {Map} `this`
-     * @see [Display map navigation controls](https://www.mapbox.com/mapbox-gl-js/example/navigation/)
+     * @see [显示地图导航控件](https://www.mapbox.com/mapbox-gl-js/example/navigation/)
      */
     addControl(control: IControl, position?: ControlPosition) {
         if (position === undefined && control.getDefaultPosition) {
@@ -420,9 +413,10 @@ class Map extends Camera {
     }
 
     /**
-     * Removes the control from the map.
+     * 移除地图的控制器。
      *
-     * @param {IControl} control The {@link IControl} to remove.
+     * @param {IControl} control 被移除的控制器 {@link IControl}。
+     * 
      * @returns {Map} `this`
      */
     removeControl(control: IControl) {
@@ -431,13 +425,12 @@ class Map extends Camera {
     }
 
     /**
-     * Resizes the map according to the dimensions of its
-     * `container` element.
-     *
-     * This method must be called after the map's `container` is resized by another script,
-     * or when the map is shown after being initially hidden with CSS.
-     *
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * 通过“容器”元素的大小调整地图的大小。
+     * 
+     * 当地图的“容器”被别的脚本重制大小或者当地图被CSS初始化隐藏后显示时候这个方法将会被调用。
+     * 
+     * @param eventData 该方法触发的事件对象的属性。
+     * 
      * @returns {Map} `this`
      */
     resize(eventData?: Object) {
@@ -458,10 +451,8 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the map's geographical bounds. When the bearing or pitch is non-zero, the visible region is not
-     * an axis-aligned rectangle, and the result is the smallest bounds that encompasses the visible region.
-     *
-     * @returns {LngLatBounds}
+     * 返回地图的地理边界。当方位或者定位数据是非零的数据，可见区域不是一个轴对称的矩形，其结果是可见区域的最小边界。
+     * 
      */
     getBounds() {
         return new LngLatBounds()
@@ -472,11 +463,7 @@ class Map extends Camera {
     }
 
     /**
-     * Gets the map's geographical bounds.
-     *
-     * Returns the LngLatBounds by which pan and zoom operations on the map are constrained.
-     *
-     * @returns {LngLatBounds | null} The maximum bounds the map is constrained to, or `null` if none set.
+     * 返回地图的最大地理边界，如果没有设置，则返回“null”。
      */
     getMaxBounds () {
         if (this.transform.latRange && this.transform.latRange.length === 2 &&
@@ -489,16 +476,15 @@ class Map extends Camera {
     }
 
     /**
-     * Sets or clears the map's geographical bounds.
+     * 设置或者清理地图的地理边界。
      *
-     * Pan and zoom operations are constrained within these bounds.
-     * If a pan or zoom is performed that would
-     * display regions outside these bounds, the map will
-     * instead display a position and zoom level
-     * as close as possible to the operation's request while still
-     * remaining within the bounds.
+     * 平移和缩放操作受限于这些边界。
+     * 如果执行平移或缩放以显示这些边界之外的区域，则地图依然会在边界内显示尽可能接近操作
+     * 请求的位置和缩放级别。
      *
-     * @param {LngLatBoundsLike | null | undefined} lnglatbounds The maximum bounds to set. If `null` or `undefined` is provided, the function removes the map's maximum bounds.
+     * @param {LngLatBoundsLike | null | undefined} bounds 设置的最大边界。
+     * 如果设置为“null”或者“undefined”，则这个方法将会移除地图的最大边界。
+     * 
      * @returns {Map} `this`
      */
     setMaxBounds(lnglatbounds: LngLatBoundsLike) {
@@ -518,12 +504,12 @@ class Map extends Camera {
     }
 
     /**
-     * Sets or clears the map's minimum zoom level.
-     * If the map's current zoom level is lower than the new minimum,
-     * the map will zoom to the new minimum.
+     * 设置或者清理地图的最小缩放级别。
+     * 如果地图当前设置的级别比新的最小级别要小，那么地图将会缩放到新的最小级别。
      *
-     * @param {number | null | undefined} minZoom The minimum zoom level to set (0-24).
-     *   If `null` or `undefined` is provided, the function removes the current minimum zoom (i.e. sets it to 0).
+     * @param {number | null | undefined} minZoom 设置的最小级别（0-24）。
+     * 如果设置为“null”或者“undefined”，这个方法会移除当前最小级别（换句话说，设置最小级别为0）。
+     *   
      * @returns {Map} `this`
      */
     setMinZoom(minZoom?: ?number) {
@@ -542,19 +528,18 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the map's minimum allowable zoom level.
+     * 返回地图的最小允许缩放级别。
      *
      * @returns {number} minZoom
      */
     getMinZoom() { return this.transform.minZoom; }
 
     /**
-     * Sets or clears the map's maximum zoom level.
-     * If the map's current zoom level is higher than the new maximum,
-     * the map will zoom to the new maximum.
+     * 设置或者清除地图的最大缩放级别。
+     * 如果地图当前缩放级比设置的新最大级别要大，那么地图将要缩放到新设置的最大级别。
      *
-     * @param {number | null | undefined} maxZoom The maximum zoom level to set.
-     *   If `null` or `undefined` is provided, the function removes the current maximum zoom (sets it to 22).
+     * @param {number | null | undefined} maxZoom 设置的最大级别。
+     * 如果参数是 “null” 或者 "undefined"，这个方法会移除当前最大设置级别（换句话说，设置最大级别为22）
      * @returns {Map} `this`
      */
     setMaxZoom(maxZoom?: ?number) {
@@ -573,16 +558,17 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the state of renderWorldCopies.
+     * 返回绘制世界副本参数的值
      *
      * @returns {boolean} renderWorldCopies
      */
     getRenderWorldCopies() { return this.transform.renderWorldCopies; }
 
     /**
-     * Sets the state of renderWorldCopies.
+     * 设置绘制世界副本参数的值
      *
-     * @param {boolean} renderWorldCopies If `true`, multiple copies of the world will be rendered, when zoomed out. `undefined` is treated as `true`, `null` is treated as `false`.
+     * @param {boolean} renderWorldCopies 如果为“true”，当缩放时，世界的多个副本将会被绘制。
+     * “undefined”将被视作“true”，“null”将被视为“false”。
      * @returns {Map} `this`
      */
     setRenderWorldCopies(renderWorldCopies?: ?boolean) {
@@ -594,37 +580,37 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the map's maximum allowable zoom level.
-     *
+     * 返回地图的最大允许缩放级别。
+     * 
      * @returns {number} maxZoom
      */
     getMaxZoom() { return this.transform.maxZoom; }
 
     /**
-     * Returns a {@link Point} representing pixel coordinates, relative to the map's `container`,
-     * that correspond to the specified geographical location.
+     * 指定{@link Point}的地理位置，返回其相对于地图的“容器”的像素坐标。
      *
-     * @param {LngLatLike} lnglat The geographical location to project.
-     * @returns {Point} The {@link Point} corresponding to `lnglat`, relative to the map's `container`.
+     * @param {LngLatLike} lnglat 重投影的地理位置坐标。
+     * 
+     * @returns {Point} 这个{@link Point}相对于地图“容器”的位置。
      */
     project(lnglat: LngLatLike) {
         return this.transform.locationPoint(LngLat.convert(lnglat));
     }
 
     /**
-     * Returns a {@link LngLat} representing geographical coordinates that correspond
-     * to the specified pixel coordinates.
+     * 指定{@link LngLat}像素坐标，返回其对应的地理坐标。
      *
-     * @param {PointLike} point The pixel coordinates to unproject.
-     * @returns {LngLat} The {@link LngLat} corresponding to `point`.
-     * @see [Show polygon information on click](https://www.mapbox.com/mapbox-gl-js/example/polygon-popup-on-click/)
+     * @param {PointLike} point 指定的像素坐标
+     * @returns {LngLat} {@link LngLat}的地理坐标。
+     * @see [显示点击的多边形信息](https://www.mapbox.com/mapbox-gl-js/example/polygon-popup-on-click/)
      */
     unproject(point: PointLike) {
         return this.transform.pointLocation(Point.convert(point));
     }
 
     /**
-     * Returns true if the map is panning, zooming, rotating, or pitching due to a camera animation or user gesture.
+     * 如果由于相机动画或者用户手势造成地图移动，缩放，旋转或者上下摇晃，则返回 true。
+     * 
      */
     isMoving(): boolean {
         return this._moving ||
@@ -634,7 +620,8 @@ class Map extends Camera {
     }
 
     /**
-     * Returns true if the map is zooming due to a camera animation or user gesture.
+     * 如果由于相机动画或者用户手势造成地图缩放，则返回 true。
+     * 
      */
     isZooming(): boolean {
         return this._zooming ||
@@ -642,7 +629,8 @@ class Map extends Camera {
     }
 
     /**
-     * Returns true if the map is rotating due to a camera animation or user gesture.
+     * 如果由于相机动画或者用户手势造成地图旋转，则返回 true。
+     * 
      */
     isRotating(): boolean {
         return this._rotating ||
@@ -650,32 +638,29 @@ class Map extends Camera {
     }
 
     /**
-     * Adds a listener for events of a specified type.
+     * 添加指定类型的监听事件。
      *
      * @method
      * @name on
      * @memberof Map
      * @instance
-     * @param {string} type The event type to add a listen for.
-     * @param {Function} listener The function to be called when the event is fired.
-     *   The listener function is called with the data object passed to `fire`,
-     *   extended with `target` and `type` properties.
+     * @param {string} type 监听事件类型
+     * @param {Function} listener 当事件被触发后的回调监听方法。
+     *   当事件被触发这个方法会被调用，带有“target”和“type”两个参数.
      * @returns {Map} `this`
      */
 
     /**
-     * Adds a listener for events of a specified type occurring on features in a specified style layer.
+     * 添加图层上要素的监听事件。
      *
-     * @param {string} type The event type to listen for; one of `'mousedown'`, `'mouseup'`, `'click'`, `'dblclick'`,
+     * @param {string} type T监听事件的类型；`'mousedown'`, `'mouseup'`, `'click'`, `'dblclick'`,
      * `'mousemove'`, `'mouseenter'`, `'mouseleave'`, `'mouseover'`, `'mouseout'`, `'contextmenu'`, `'touchstart'`,
-     * `'touchend'`, or `'touchcancel'`. `mouseenter` and `mouseover` events are triggered when the cursor enters
-     * a visible portion of the specified layer from outside that layer or outside the map canvas. `mouseleave`
-     * and `mouseout` events are triggered when the cursor leaves a visible portion of the specified layer, or leaves
-     * the map canvas.
-     * @param {string} layer The ID of a style layer. Only events whose location is within a visible
-     * feature in this layer will trigger the listener. The event will have a `features` property containing
-     * an array of the matching features.
-     * @param {Function} listener The function to be called when the event is fired.
+     * `'touchend'`, 或者 `'touchcancel'`其中之一。当鼠标从图层外部进入图层或者地图外面进入地图后触发事件`mouseenter` 和 `mouseover`。
+     * 当鼠标离开图层可见部分或者移动到地图外部会触发`mouseleave` 和 `mouseout`事件。
+     * 
+     * @param {string} 图层的ID。只有位于此图层可见要素内的事件才会触发监听器。
+     * 该事件有一个`features`属性，它包含所有相匹配要素的数组。
+     * @param {Function} listener 事件被触发后回调方法。
      * @returns {Map} `this`
      */
     on(type: MapEvent, layer: any, listener: any) {
@@ -743,23 +728,23 @@ class Map extends Camera {
     }
 
     /**
-     * Removes an event listener previously added with `Map#on`.
+     * 移除之前通过“Map#on”添加的事件监听器。
      *
      * @method
      * @name off
      * @memberof Map
      * @instance
-     * @param {string} type The event type previously used to install the listener.
-     * @param {Function} listener The function previously installed as a listener.
+     * @param {string} type 之前事件监听器的事件类型
+     * @param {Function} listener 之前事件监听器的回调方法
      * @returns {Map} `this`
      */
 
     /**
-     * Removes an event listener for layer-specific events previously added with `Map#on`.
+     * 移除之前通过“Map#on”添加的图层事件监听器。
      *
-     * @param {string} type The event type previously used to install the listener.
-     * @param {string} layer The layer ID previously used to install the listener.
-     * @param {Function} listener The function previously installed as a listener.
+     * @param {string} type 之前事件监听器的事件类型。
+     * @param {string} layer 之前事件监听器的图层ID。
+     * @param {Function} listener 之前事件监听器的回调方法
      * @returns {Map} `this`
      */
     off(type: MapEvent, layer: any, listener: any) {
@@ -785,65 +770,53 @@ class Map extends Camera {
     }
 
     /**
-     * Returns an array of [GeoJSON](http://geojson.org/)
-     * [Feature objects](https://tools.ietf.org/html/rfc7946#section-3.2)
-     * representing visible features that satisfy the query parameters.
-     *
-     * @param {PointLike|Array<PointLike>} [geometry] - The geometry of the query region:
-     * either a single point or southwest and northeast points describing a bounding box.
-     * Omitting this parameter (i.e. calling {@link Map#queryRenderedFeatures} with zero arguments,
-     * or with only a `options` argument) is equivalent to passing a bounding box encompassing the entire
-     * map viewport.
+     * 返回一个数组 [GeoJSON](http://geojson.org/)
+     * [要素对象](https://tools.ietf.org/html/rfc7946#section-3.2)
+     * 所有满足查询条件的可见要素。
+     * 
+     * @param {PointLike|Array<PointLike>} [geometry] - 查询区域的几何对象：是一个点或者一个包含西南点和东北点的矩形。
+     * 忽略这个参数（换句话说，使用0个参数或者只有一个“可选”的参数来调用方法{@link Map#queryRenderedFeatures}）
+     * 相当于传递了整个地图可视范围的边界作为参数。
      * @param {Object} [options]
-     * @param {Array<string>} [options.layers] An array of style layer IDs for the query to inspect.
-     *   Only features within these layers will be returned. If this parameter is undefined, all layers will be checked.
-     * @param {Array} [options.filter] A [filter](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter)
-     *   to limit query results.
+     * @param {Array<string>} [options.layers] 查询的图层ID数组。只有这些图层的要素会被返回。如果这个参数是undefined，所有的图层都会被检查。
+     * @param {Array} [options.filter] 制查询的过滤器[过滤器](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter)
      *
-     * @returns {Array<Object>} An array of [GeoJSON](http://geojson.org/)
-     * [feature objects](https://tools.ietf.org/html/rfc7946#section-3.2).
+     * @returns {Array<Object>} [GeoJSON](http://geojson.org/)
+     * [要素对象](https://tools.ietf.org/html/rfc7946#section-3.2)数组。
      *
-     * The `properties` value of each returned feature object contains the properties of its source feature. For GeoJSON sources, only
-     * string and numeric property values are supported (i.e. `null`, `Array`, and `Object` values are not supported).
+     * 每个返回的要素对象的“properties”值包含其资源要素的所有属性。对于GeoJSON源，仅支持字符串和数字属性值（即不支持“null”，“Array”和“Object”值）。
      *
-     * Each feature includes top-level `layer`, `source`, and `sourceLayer` properties. The `layer` property is an object
-     * representing the style layer to  which the feature belongs. Layout and paint properties in this object contain values
-     * which are fully evaluated for the given zoom level and feature.
+     * 每一个要素对象都包含顶级“layer”，“source”和“sourceLayer”属性。这个“layer”属性表示该要素所属样式层的对象。
+     * 这个对象包含在给定级别和要素的所有布局和绘制属性
      *
-     * Features from layers whose `visibility` property is `"none"`, or from layers whose zoom range excludes the
-     * current zoom level are not included. Symbol features that have been hidden due to text or icon collision are
-     * not included. Features from all other layers are included, including features that may have no visible
-     * contribution to the rendered result; for example, because the layer's opacity or color alpha component is set to
-     * 0.
+     * 不包括“visibility”属性为“none”的图层的要素，或者缩放范围不包括当前缩放级别的图层的要素。
+     * 不包括因文本或图标碰撞而隐藏的符号要素。但是包括所有其他图层的要素，包括可能对渲染结果没有明显
+     * 作用的要素;例如，因为图层的透明度或颜色alpha值被设置为0。
      *
-     * The topmost rendered feature appears first in the returned array, and subsequent features are sorted by
-     * descending z-order. Features that are rendered multiple times (due to wrapping across the antimeridian at low
-     * zoom levels) are returned only once (though subject to the following caveat).
-     *
-     * Because features come from tiled vector data or GeoJSON data that is converted to tiles internally, feature
-     * geometries may be split or duplicated across tile boundaries and, as a result, features may appear multiple
-     * times in query results. For example, suppose there is a highway running through the bounding rectangle of a query.
-     * The results of the query will be those parts of the highway that lie within the map tiles covering the bounding
-     * rectangle, even if the highway extends into other tiles, and the portion of the highway within each map tile
-     * will be returned as a separate feature. Similarly, a point feature near a tile boundary may appear in multiple
-     * tiles due to tile buffering.
+     * 最顶层的渲染要素首先出现在返回的数组中，后续要素按Z方向降序排列。多次被渲染的特征（由于在较低的缩放级别穿
+     * 过本初子午线）仅返回一次（但需遵守以下说明）。
+     * 
+     * 由于要素来自矢量瓦片数据或在内部转换为切片的GeoJSON数据，因此要素几何体可能会跨切片边界进行拆分或复制，
+     * 因此，要素可能会在查询结果中多次出现。例如，假设有一条公路穿过查询的矩形边界。查询的结果将是位于覆盖边界
+     * 矩形的地图瓦片内的高速公路的那些部分，即使高速公路延伸到其它瓦片中，并且每个地图瓦片内的高速公路部分将作
+     * 为单独的特征被返回。类似地，由于缓冲影响瓦片边界附近的点特征可能出现在多个瓦片中。
      *
      * @example
-     * // Find all features at a point
+     * // 查询点的所有要素
      * var features = map.queryRenderedFeatures(
      *   [20, 35],
      *   { layers: ['my-layer-name'] }
      * );
      *
      * @example
-     * // Find all features within a static bounding box
+     * // 查询边界框内所有的要素
      * var features = map.queryRenderedFeatures(
      *   [[10, 20], [30, 50]],
      *   { layers: ['my-layer-name'] }
      * );
      *
      * @example
-     * // Find all features within a bounding box around a point
+     * // 查找点周围的边界框内的所有要素
      * var width = 10;
      * var height = 20;
      * var features = map.queryRenderedFeatures([
@@ -852,11 +825,11 @@ class Map extends Camera {
      * ], { layers: ['my-layer-name'] });
      *
      * @example
-     * // Query all rendered features from a single layer
+     * // 查找单独图层内的所有渲染要素
      * var features = map.queryRenderedFeatures({ layers: ['my-layer-name'] });
-     * @see [Get features under the mouse pointer](https://www.mapbox.com/mapbox-gl-js/example/queryrenderedfeatures/)
-     * @see [Highlight features within a bounding box](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
-     * @see [Center the map on a clicked symbol](https://www.mapbox.com/mapbox-gl-js/example/center-on-symbol/)
+     * @see [鼠标点击显示要素属性](https://www.mapbox.com/mapbox-gl-js/example/queryrenderedfeatures/)
+     * @see [高亮要素的边界](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
+     * @see [点击标志物使得地图居中](https://www.mapbox.com/mapbox-gl-js/example/center-on-symbol/)
      */
     queryRenderedFeatures(geometry?: PointLike | [PointLike, PointLike], options?: Object) {
         // The first parameter can be omitted entirely, making this effectively an overloaded method
@@ -930,56 +903,45 @@ class Map extends Camera {
     }
 
     /**
-     * Returns an array of [GeoJSON](http://geojson.org/)
-     * [Feature objects](https://tools.ietf.org/html/rfc7946#section-3.2)
-     * representing features within the specified vector tile or GeoJSON source that satisfy the query parameters.
+     * 
+     * 返回满足条件的指定矢量切片或GeoJSON[GeoJSON](http://geojson.org/)源中的
+     * 要素[要素对象](https://tools.ietf.org/html/rfc7946#section-3.2)的数组
      *
-     * @param {string} sourceID The ID of the vector tile or GeoJSON source to query.
+     * 
+     * @param {string} sourceID 查询的矢量瓦片或者GeoJSON的资源ID。
      * @param {Object} [parameters]
-     * @param {string} [parameters.sourceLayer] The name of the vector tile layer to query. *For vector tile
-     *   sources, this parameter is required.* For GeoJSON sources, it is ignored.
-     * @param {Array} [parameters.filter] A [filter](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter)
-     *   to limit query results.
+     * @param {string} [parameters.sourceLayer] T查询的矢量瓦片图层的名称。*对于矢量资源，这个参数是必须的。*对于GeoJSON数据资源，它是可以忽略的。
+     * @param {Array} [parameters.filter] 查询结果的过滤器[过滤器](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter)
      *
-     * @returns {Array<Object>} An array of [GeoJSON](http://geojson.org/)
-     * [Feature objects](https://tools.ietf.org/html/rfc7946#section-3.2).
+     * @returns {Array<Object>} [GeoJSON](http://geojson.org/)
+     * [要素对象](https://tools.ietf.org/html/rfc7946#section-3.2)的数组.
      *
-     * In contrast to {@link Map#queryRenderedFeatures}, this function
-     * returns all features matching the query parameters,
-     * whether or not they are rendered by the current style (i.e. visible). The domain of the query includes all currently-loaded
-     * vector tiles and GeoJSON source tiles: this function does not check tiles outside the currently
-     * visible viewport.
+     * 对比方法{@link Map#queryRenderedFeatures}，这个方法返回所有满足条件的要素值，无论它们是否被当前样式绘制
+     * （比如可见属性）。查询的范围包括当前加载的矢量瓦片资源和GeoJSON瓦片资源：这个方法不检查瓦片是否在当前可视范围内。
      *
-     * Because features come from tiled vector data or GeoJSON data that is converted to tiles internally, feature
-     * geometries may be split or duplicated across tile boundaries and, as a result, features may appear multiple
-     * times in query results. For example, suppose there is a highway running through the bounding rectangle of a query.
-     * The results of the query will be those parts of the highway that lie within the map tiles covering the bounding
-     * rectangle, even if the highway extends into other tiles, and the portion of the highway within each map tile
-     * will be returned as a separate feature. Similarly, a point feature near a tile boundary may appear in multiple
-     * tiles due to tile buffering.
-     * @see [Filter features within map view](https://www.mapbox.com/mapbox-gl-js/example/filter-features-within-map-view/)
-     * @see [Highlight features containing similar data](https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/)
+     * 由于要素来自矢量瓦片数据或在内部转换为切片的GeoJSON数据，因此要素几何体可能会跨切片边界进行拆分或复制，
+     * 因此，要素可能会在查询结果中多次出现。例如，假设有一条公路穿过查询的矩形边界。查询的结果将是位于覆盖边界
+     * 矩形的地图瓦片内的高速公路的那些部分，即使高速公路延伸到其它瓦片中，并且每个地图瓦片内的高速公路部分将作
+     * 为单独的特征被返回。类似地，由于缓冲影响瓦片边界附近的点特征可能出现在多个瓦片中。
+     * 
+     * @see [通过地图视图过滤要素](https://www.mapbox.com/mapbox-gl-js/example/filter-features-within-map-view/)
+     * @see [高亮包含相同数据的要素](https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/)
      */
     querySourceFeatures(sourceID: string, parameters: ?{sourceLayer: ?string, filter: ?Array<any>}) {
         return this.style.querySourceFeatures(sourceID, parameters);
     }
 
     /**
-     * Updates the map's Mapbox style object with a new value.  If the given
-     * value is style JSON object, compares it against the the map's current
-     * state and perform only the changes necessary to make the map style match
-     * the desired state.
+     * 使用新的值更新地图的Mapbox样式对象。如果给定值是样式是JSON对象，则将其与当前状态进行比较，
+     * 并仅执行发生修改的地方。
      *
-     * @param style A JSON object conforming to the schema described in the
-     *   [Mapbox Style Specification](https://mapbox.com/mapbox-gl-style-spec/), or a URL to such JSON.
+     * @param style 符合规范的JSON对象[Mapbox Style 规范](https://mapbox.com/mapbox-gl-style-spec/)，或者是JSON的一个URL地址。
      * @param {Object} [options]
-     * @param {boolean} [options.diff=true] If false, force a 'full' update, removing the current style
-     *   and adding building the given one instead of attempting a diff-based update.
-     * @param {string} [options.localIdeographFontFamily=null] If non-null, defines a css font-family
-     *   for locally overriding generation of glyphs in the 'CJK Unified Ideographs' and 'Hangul Syllables'
-     *   ranges. Forces a full update.
+     * @param {boolean} [options.diff=true] 如果是“false”，强制全部更新，同时移除当前样式，并且使用新设置的样式。
+     * @param {string} [options.localIdeographFontFamily=null] 如果非空，定义一个CSS的字体样式用啦覆盖生成的样式'CJK Unified Ideographs' 和 'Hangul Syllables'。强制全部更新。
+     *   
      * @returns {Map} `this`
-     * @see [Change a map's style](https://www.mapbox.com/mapbox-gl-js/example/setstyle/)
+     * @see [改变地图样式](https://www.mapbox.com/mapbox-gl-js/example/setstyle/)
      */
     setStyle(style: StyleSpecification | string | null, options?: {diff?: boolean} & StyleOptions) {
         const shouldTryDiff = (!options || (options.diff !== false && !options.localIdeographFontFamily)) && this.style;
@@ -1020,9 +982,10 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the map's Mapbox style object, which can be used to recreate the map's style.
-     *
-     * @returns {Object} The map's style object.
+     * 返回地图的 Mapbox 样式对象，它可以被用来创建地图的样式。
+     * 
+     * @returns {Object} 地图的样式对象。
+     * 
      */
     getStyle() {
         if (this.style) {
@@ -1031,9 +994,9 @@ class Map extends Camera {
     }
 
     /**
-     * Returns a Boolean indicating whether the map's style is fully loaded.
+     * 返回地图的样式是否被完全加载的标识。
      *
-     * @returns {boolean} A Boolean indicating whether the style is fully loaded.
+     * @returns {boolean} 样式是否完全加载的标识。
      */
     isStyleLoaded() {
         if (!this.style) return warnOnce('There is no style added to the map.');
@@ -1041,17 +1004,17 @@ class Map extends Camera {
     }
 
     /**
-     * Adds a source to the map's style.
+     * 将指定的资源添加到地图的样式中。
      *
-     * @param {string} id The ID of the source to add. Must not conflict with existing sources.
-     * @param {Object} source The source object, conforming to the
-     * Mapbox Style Specification's [source definition](https://www.mapbox.com/mapbox-gl-style-spec/#sources) or
-     * {@link CanvasSourceOptions}.
+     * @param {string} id 被添加的资源ID。不能和现有资源冲突。
+     * 
+     * @param {Object} source 资源的对象，样式规范参考 Mapbox Style [资源规范](https://www.mapbox.com/mapbox-gl-style-spec/#sources)或者{@link CanvasSourceOptions}.
+     * 
      * @fires source.add
      * @returns {Map} `this`
-     * @see [Draw GeoJSON points](https://www.mapbox.com/mapbox-gl-js/example/geojson-markers/)
-     * @see [Style circles using data-driven styling](https://www.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/)
-     * @see [Set a point after Geocoder result](https://www.mapbox.com/mapbox-gl-js/example/point-from-geocoder-result/)
+     * @see [绘制GeoJson点集合](https://www.mapbox.com/mapbox-gl-js/example/geojson-markers/)
+     * @see [使用数据驱动绘制的圆](https://www.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/)
+     * @see [设置位置解析后的一个点](https://www.mapbox.com/mapbox-gl-js/example/point-from-geocoder-result/)
      */
     addSource(id: string, source: SourceSpecification) {
         this.style.addSource(id, source);
@@ -1060,10 +1023,12 @@ class Map extends Camera {
     }
 
     /**
-     * Returns a Boolean indicating whether the source is loaded.
+     * 返回指定的资源十分被加载的标识。
      *
-     * @param {string} id The ID of the source to be checked.
-     * @returns {boolean} A Boolean indicating whether the source is loaded.
+     * @param {string} id 被检查的资源的ID。
+     * 
+     * @returns {boolean} 返回资源是否被加载的标识。
+     * 
      */
     isSourceLoaded(id: string) {
         const source = this.style && this.style.sourceCaches[id];
@@ -1075,10 +1040,9 @@ class Map extends Camera {
     }
 
     /**
-     * Returns a Boolean indicating whether all tiles in the viewport from all sources on
-     * the style are loaded.
-     *
-     * @returns {boolean} A Boolean indicating whether all tiles are loaded.
+     * 返回在样式中所有资源的视图中的瓦片是否被加载的标识。
+     * 
+     * @returns {boolean} 瓦片是否被全部加载的标识。
      */
 
     areTilesLoaded() {
@@ -1095,21 +1059,25 @@ class Map extends Camera {
     }
 
     /**
-     * Adds a [custom source type](#Custom Sources), making it available for use with
-     * {@link Map#addSource}.
+     * 添加[自定义资源类型](#Custom Sources), 并且使之可供使用{@link Map#addSource}.
+     * 
      * @private
-     * @param {string} name The name of the source type; source definition objects use this name in the `{type: ...}` field.
-     * @param {Function} SourceType A {@link Source} constructor.
-     * @param {Function} callback Called when the source type is ready or with an error argument if there is an error.
+     * @param {string} name 资源类型的名称；使用“{type: ...}”字段定义资源类型对象
+     * 
+     * @param {Function} SourceType 构造函数{@link Source}
+     * 
+     * @param {Function} callback 当资源类型定义完成或者发生异常时候（带有异常参数）会被调用
+     * 
      */
     addSourceType(name: string, SourceType: any, callback: Function) {
         return this.style.addSourceType(name, SourceType, callback);
     }
 
     /**
-     * Removes a source from the map's style.
+     * 从地图的样式中删除指定的资源。
      *
-     * @param {string} id The ID of the source to remove.
+     * @param {string} id 指定删除的资源ID。
+     * 
      * @returns {Map} `this`
      */
     removeSource(id: string) {
@@ -1119,33 +1087,34 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the source with the specified ID in the map's style.
+     * 返回地图样式中对应ID的资源。
      *
-     * @param {string} id The ID of the source to get.
-     * @returns {?Object} The style source with the specified ID, or `undefined`
-     *   if the ID corresponds to no existing sources.
-     * @see [Create a draggable point](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
-     * @see [Animate a point](https://www.mapbox.com/mapbox-gl-js/example/animate-point-along-line/)
-     * @see [Add live realtime data](https://www.mapbox.com/mapbox-gl-js/example/live-geojson/)
+     * @param {string} id 查找的资源ID。
+     * @returns {?Object} 指定ID的资源，或者在资源中查找不到指定的ID，则返回“undefined”。
+     *   
+     * @see [创建可拖拽的点](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
+     * @see [点动画](https://www.mapbox.com/mapbox-gl-js/example/animate-point-along-line/)
+     * @see [添加实时数据](https://www.mapbox.com/mapbox-gl-js/example/live-geojson/)
      */
     getSource(id: string) {
         return this.style.getSource(id);
     }
 
     /**
-     * Add an image to the style. This image can be used in `icon-image`,
-     * `background-pattern`, `fill-pattern`, and `line-pattern`. An
-     * {@link Map#error} event will be fired if there is not enough space in the
-     * sprite to add this image.
+     * 添加一张图片到样式中。这张图片可以被用来作为“icon-image”，“background-pattern”，
+     * “fill-pattern”，或者“line-pattern”。如果在精灵上没有足够的空间添加这张图片将会触发
+     * {@link Map#error} 事件。
+     * 
      *
-     * @see [Add an icon to the map](https://www.mapbox.com/mapbox-gl-js/example/add-image/)
-     * @see [Add a generated icon to the map](https://www.mapbox.com/mapbox-gl-js/example/add-image-generated/)
-     * @param id The ID of the image.
-     * @param image The image as an `HTMLImageElement`, `ImageData`, or object with `width`, `height`, and `data`
-     * properties with the same format as `ImageData`.
+     * @see [添加一个图标到地图上](https://www.mapbox.com/mapbox-gl-js/example/add-image/)
+     * @see [添加一个生成的图片到地图上](https://www.mapbox.com/mapbox-gl-js/example/add-image-generated/)
+     * 
+     * @param id 图片的ID。
+     * @param image 这张图片将被作为`HTMLImageElement`, `ImageData`或者是类似`ImageData`包含有`width`, `height`, 和 `data`属性的对象。
      * @param options
-     * @param options.pixelRatio The ratio of pixels in the image to physical pixels on the screen
-     * @param options.sdf Whether the image should be interpreted as an SDF image
+     * @param options.pixelRatio 图片中像素与屏幕上物理像素的比率。
+     * @param options.sdf 图片是否会被当作为SDF格式图片。
+     * 
      */
     addImage(id: string,
              image: HTMLImageElement | ImageData | {width: number, height: number, data: Uint8Array | Uint8ClampedArray},
@@ -1164,9 +1133,10 @@ class Map extends Camera {
     }
 
     /**
-     * Define wether the image has been added or not
-     *
-     * @param id The ID of the image.
+     * 定义图片是否已经被添加
+     * 
+     * @param id 图片的ID
+     * 
      */
     hasImage(id: string): boolean {
         if (!id) {
@@ -1178,50 +1148,48 @@ class Map extends Camera {
     }
 
     /**
-     * Remove an image from the style (such as one used by `icon-image` or `background-pattern`).
-     *
-     * @param id The ID of the image.
+     * 从样式中删除指定的图片（例如被用来作为“icon-image”或者“background-pattern”的图片）。
+     * 
+     * @param id 图片的ID。
+     * 
      */
     removeImage(id: string) {
         this.style.removeImage(id);
     }
 
     /**
-     * Load an image from an external URL for use with `Map#addImage`. External
-     * domains must support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
-     *
-     * @param {string} url The URL of the image file. Image file must be in png, webp, or jpg format.
-     * @param {Function} callback Expecting `callback(error, data)`. Called when the image has loaded or with an error argument if there is an error.
-     * @see [Add an icon to the map](https://www.mapbox.com/mapbox-gl-js/example/add-image/)
+     * 通过包含“Map#addImage”的外部URL加载图片。外部资源必须支持[跨域](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
+     * 
+     * @param {string} url 图片的URL地址。图片资源必须是png，webp，或者jpg格式。
+     * @param {Function} callback 回调方法“callback(error, data)”。当图片加载完成或者加载发生错误时候调用该方法。
+     * @see [添加一个icon到地图上](https://www.mapbox.com/mapbox-gl-js/example/add-image/)
      */
     loadImage(url: string, callback: Function) {
         getImage(this._transformRequest(url, ResourceType.Image), callback);
     }
 
     /**
-    * Returns an Array of strings containing the names of all sprites/images currently available in the map
-    *
-    * @returns {Array<string>} An Array of strings containing the names of all sprites/images currently available in the map
-    *
+    * 返回当前地图上所有可用的精灵或者图片的名字列表。
+    * 
+    * @returns {Array<string>} 当前地图上所有可用的精灵或者图片的名字列表。
     */
     listImages() {
         return this.style.listImages();
     }
 
     /**
-     * Adds a [Mapbox style layer](https://www.mapbox.com/mapbox-gl-style-spec/#layers)
-     * to the map's style.
+     * 添加一个[Mapbox 样式图层](https://www.mapbox.com/mapbox-gl-style-spec/#layers)到地图上
      *
-     * A layer defines styling for data from a specified source.
-     *
-     * @param {Object} layer The style layer to add, conforming to the Mapbox Style Specification's
-     *   [layer definition](https://www.mapbox.com/mapbox-gl-style-spec/#layers).
-     * @param {string} [before] The ID of an existing layer to insert the new layer before.
-     *   If this argument is omitted, the layer will be appended to the end of the layers array.
+     * 图层的样式来自于一个指定资源。
+     * 
+     * @param {Object} layer 添加的图层。必须符合Mapbox样式定义[图层定义](https://www.mapbox.com/mapbox-gl-style-spec/#layers)。
+     * @param {string} [before] T一个已经存在的图层，用于插入到新的图层上一层。
+     *   如果这个参数被忽略，新的图层将会被放置在图层数组的末尾。
+     * 
      * @returns {Map} `this`
-     * @see [Create and style clusters](https://www.mapbox.com/mapbox-gl-js/example/cluster/)
-     * @see [Add a vector tile source](https://www.mapbox.com/mapbox-gl-js/example/vector-source/)
-     * @see [Add a WMS source](https://www.mapbox.com/mapbox-gl-js/example/wms/)
+     * @see [创建聚合样式](https://www.mapbox.com/mapbox-gl-js/example/cluster/)
+     * @see [添加矢量瓦片资源](https://www.mapbox.com/mapbox-gl-js/example/vector-source/)
+     * @see [添加WMS服务资源](https://www.mapbox.com/mapbox-gl-js/example/wms/)
      */
     addLayer(layer: LayerSpecification, before?: string) {
         this.style.addLayer(layer, before);
@@ -1230,11 +1198,12 @@ class Map extends Camera {
     }
 
     /**
-     * Moves a layer to a different z-position.
+     * 移动图层到别的层级。
      *
-     * @param {string} id The ID of the layer to move.
-     * @param {string} [beforeId] The ID of an existing layer to insert the new layer before.
-     *   If this argument is omitted, the layer will be appended to the end of the layers array.
+     * @param {string} id 被移动的图层ID。
+     * @param {string} [beforeId] 要插入图层位置的上一级图层的ID。
+     * 如果这个参数被忽略，这个图层将会被添加到图层组的最后。
+     *   
      * @returns {Map} `this`
      */
     moveLayer(id: string, beforeId?: string) {
@@ -1244,11 +1213,12 @@ class Map extends Camera {
     }
 
     /**
-     * Removes the layer with the given id from the map's style.
+     * 从地图的样式中移除指定ID的图层。
      *
-     * If no such layer exists, an `error` event is fired.
+     * 如果指定的图层不存在，将会触发`error`事件。
      *
-     * @param {string} id id of the layer to remove
+     * @param {string} id 需要移除图层的ID。
+     * 
      * @fires error
      */
     removeLayer(id: string) {
@@ -1258,30 +1228,31 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the layer with the specified ID in the map's style.
+     * 返回地图样式中指定ID的图层。
      *
-     * @param {string} id The ID of the layer to get.
-     * @returns {?Object} The layer with the specified ID, or `undefined`
-     *   if the ID corresponds to no existing layers.
-     * @see [Filter symbols by toggling a list](https://www.mapbox.com/mapbox-gl-js/example/filter-markers/)
-     * @see [Filter symbols by text input](https://www.mapbox.com/mapbox-gl-js/example/filter-markers-by-input/)
+     * @param {string} id 图层的ID。
+     * 
+     * @returns {?Object} 指定ID的图层，或者是如果指定的ID查找不到图层，则返回`undefined`。
+     * 
+     * @see [通过列表切换显示不同符号](https://www.mapbox.com/mapbox-gl-js/example/filter-markers/)
+     * @see [通过输入文本切换显示不同符号](https://www.mapbox.com/mapbox-gl-js/example/filter-markers-by-input/)
      */
     getLayer(id: string) {
         return this.style.getLayer(id);
     }
 
     /**
-     * Sets the filter for the specified style layer.
+     * 设置指定图层的过滤器。
      *
-     * @param {string} layer The ID of the layer to which the filter will be applied.
-     * @param {Array | null | undefined} filter The filter, conforming to the Mapbox Style Specification's
-     *   [filter definition](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter).  If `null` or `undefined` is provided, the function removes any existing filter from the layer.
+     * @param {string} layer 图层的ID。
+     * @param {Array | null | undefined} filter 符合Mapbox Style规范[过滤器定义](https://www.mapbox.com/mapbox-gl-js/style-spec/#other-filter)的过滤器。
+     *   如果设置为`null` 或者 `undefined`，这个方法会移除图层的所有过滤器。
      * @returns {Map} `this`
      * @example
      * map.setFilter('my-layer', ['==', 'name', 'USA']);
-     * @see [Filter features within map view](https://www.mapbox.com/mapbox-gl-js/example/filter-features-within-map-view/)
-     * @see [Highlight features containing similar data](https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/)
-     * @see [Create a timeline animation](https://www.mapbox.com/mapbox-gl-js/example/timeline-animation/)
+     * @see [通过地图视图过滤要素](https://www.mapbox.com/mapbox-gl-js/example/filter-features-within-map-view/)
+     * @see [高亮包含相同属性的要素](https://www.mapbox.com/mapbox-gl-js/example/query-similar-features/)
+     * @see [创建时间线动画](https://www.mapbox.com/mapbox-gl-js/example/timeline-animation/)
      */
     setFilter(layer: string, filter: ?FilterSpecification) {
         this.style.setFilter(layer, filter);
@@ -1290,11 +1261,12 @@ class Map extends Camera {
     }
 
     /**
-     * Sets the zoom extent for the specified style layer.
+     * 设置指定图层的缩放范围。
      *
-     * @param {string} layerId The ID of the layer to which the zoom extent will be applied.
-     * @param {number} minzoom The minimum zoom to set (0-24).
-     * @param {number} maxzoom The maximum zoom to set (0-24).
+     * @param {string} layerId 需要设置缩放范围的图层ID。
+     * @param {number} minzoom 最小缩放级别（0-24）。
+     * @param {number} maxzoom 最大缩放级别（0-24）。
+     * 
      * @returns {Map} `this`
      * @example
      * map.setLayerZoomRange('my-layer', 2, 5);
@@ -1306,52 +1278,56 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the filter applied to the specified style layer.
+     * 返回指定图层的过滤条件。
      *
-     * @param {string} layer The ID of the style layer whose filter to get.
-     * @returns {Array} The layer's filter.
+     * @param {string} layer 图层的ID。
+     * 
+     * @returns {Array} 图层的过滤器。
      */
     getFilter(layer: string) {
         return this.style.getFilter(layer);
     }
 
     /**
-     * Sets the value of a paint property in the specified style layer.
+     * 设置指定图层的绘制属性。
      *
-     * @param {string} layer The ID of the layer to set the paint property in.
-     * @param {string} name The name of the paint property to set.
-     * @param {*} value The value of the paint propery to set.
-     *   Must be of a type appropriate for the property, as defined in the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/).
+     * @param {string} layer 图层的ID。
+     * @param {string} name 绘制属性的名称。
+     * @param {*} value 绘制属性的值。
+     * 必须符合属性值规范定义，[Mapbox Style 规范](https://www.mapbox.com/mapbox-gl-style-spec/).
      * @returns {Map} `this`
      * @example
      * map.setPaintProperty('my-layer', 'fill-color', '#faafee');
-     * @see [Change a layer's color with buttons](https://www.mapbox.com/mapbox-gl-js/example/color-switcher/)
-     * @see [Adjust a layer's opacity](https://www.mapbox.com/mapbox-gl-js/example/adjust-layer-opacity/)
-     * @see [Create a draggable point](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
+     * @see [通过按钮改变图层的颜色](https://www.mapbox.com/mapbox-gl-js/example/color-switcher/)
+     * @see [修改图层的透明度](https://www.mapbox.com/mapbox-gl-js/example/adjust-layer-opacity/)
+     * @see [创建可拖动的点](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
      */
     setPaintProperty(layer: string, name: string, value: any) {
         this.style.setPaintProperty(layer, name, value);
-        this._update(true);
-        return this;
+        return this._update(true);
     }
 
     /**
-     * Returns the value of a paint property in the specified style layer.
+     * 返回指定图层的绘制属性。
      *
-     * @param {string} layer The ID of the layer to get the paint property from.
-     * @param {string} name The name of a paint property to get.
-     * @returns {*} The value of the specified paint property.
+     * @param {string} layer 图层的ID。
+     * @param {string} name 绘制属性的属性名称。
+     * 
+     * @returns {*} 指定属性的值。
+     * 
      */
     getPaintProperty(layer: string, name: string) {
         return this.style.getPaintProperty(layer, name);
     }
 
     /**
-     * Sets the value of a layout property in the specified style layer.
+     * 设置指定样式图层的布局属性。
      *
-     * @param {string} layer The ID of the layer to set the layout property in.
-     * @param {string} name The name of the layout property to set.
-     * @param {*} value The value of the layout propery. Must be of a type appropriate for the property, as defined in the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/).
+     * @param {string} layer 设置属性的图层ID。
+     * @param {string} name 设置的布局属性的名称。
+     * @param {*} value 布局属性的值。
+     * 必须符合属性值的定义规范[Mapbox Style 规范](https://www.mapbox.com/mapbox-gl-style-spec/).
+     * 
      * @returns {Map} `this`
      * @example
      * map.setLayoutProperty('my-layer', 'visibility', 'none');
@@ -1363,20 +1339,21 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the value of a layout property in the specified style layer.
+     * 返回指定样式图层中的布局属性。
      *
-     * @param {string} layer The ID of the layer to get the layout property from.
-     * @param {string} name The name of the layout property to get.
-     * @returns {*} The value of the specified layout property.
+     * @param {string} layer 指定图层的ID。
+     * @param {string} name 指定布局属性名称。
+     * @returns {*} 指定布局属性值。
      */
     getLayoutProperty(layer: string, name: string) {
         return this.style.getLayoutProperty(layer, name);
     }
 
     /**
-     * Sets the any combination of light values.
+     * 设置浅色样式组合值。
      *
-     * @param light Light properties to set. Must conform to the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/#light).
+     * @param light 设置的浅色样式属性。
+     * 必须符合[Mapbox Style规范](https://www.mapbox.com/mapbox-gl-style-spec/#light)。
      * @returns {Map} `this`
      */
     setLight(light: LightSpecification) {
@@ -1386,24 +1363,27 @@ class Map extends Camera {
     }
 
     /**
-     * Returns the value of the light object.
+     * 返回浅色样式对象值。
      *
-     * @returns {Object} light Light properties of the style.
+     * @returns {Object} light 样式的浅色属性值。
      */
     getLight() {
         return this.style.getLight();
     }
 
     /**
-     * Sets the state of a feature. The `state` object is merged in with the existing state of the feature.
+     * 设置要素的状态。这个`state`对象将会和要素中已经存在的状态合并。
      *
-     * @param {Object} [feature] Feature identifier. Feature objects returned from
-     * {@link Map#queryRenderedFeatures} or event handlers can be used as feature identifiers.
-     * @param {string} [feature.source] The Id of the vector source or GeoJSON source for the feature.
-     * @param {string} [feature.sourceLayer] (optional)  *For vector tile sources, the sourceLayer is
-     *  required.*
-     * @param {string} [feature.id] Unique id of the feature.
-     * @param {Object} state A set of key-value pairs. The values should be valid JSON types.
+     * @param {Object} [feature] 要素标识。
+     * 从方法{@link Map#queryRenderedFeatures}返回的要素对象，或者是事件控制器中被用来作为要素对象的标识对象。
+     * @param {string} [feature.id] 要素唯一的ID。
+     * @param {string} [feature.source] 要素中的矢量资源或者GeoJSON资源。
+     * @param {string} [feature.sourceLayer] （可选项）*矢量资源的资源图层是必须的。*
+     * @param {Object} state 对象键值对。所有的值必须是有效的JSON可解析类型。
+     *
+     * 这个方法需要设置资源的`feature.id`属性。对于没有要素id的GeoJSON资源，设置`GeoJSONSourceSpecification`
+     * 中的`generateIds`来自动匹配它们。这个可选项的id基于要素在资源中的索引值。
+     * 
      */
     setFeatureState(feature: { source: string; sourceLayer?: string; id: string; }, state: Object) {
         this.style.setFeatureState(feature, state);
@@ -1411,54 +1391,52 @@ class Map extends Camera {
     }
 
     /**
-     * Gets the state of a feature.
+     * 获取要素的状态
      *
-     * @param {Object} [feature] Feature identifier. Feature objects returned from
-     * {@link Map#queryRenderedFeatures} or event handlers can be used as feature identifiers.
-     * @param {string} [feature.source] The Id of the vector source or GeoJSON source for the feature.
-     * @param {string} [feature.sourceLayer] (optional)  *For vector tile sources, the sourceLayer is
-     *  required.*
-     * @param {string} [feature.id] Unique id of the feature.
+     * @param {Object} [feature] 要素标识。
+     * 从方法{@link Map#queryRenderedFeatures}返回的要素对象，或者是事件控制器中被用来作为要素对象的标识对象。
+     * @param {string} [feature.source] 要素中的矢量资源或者GeoJSON资源。
+     * @param {string} [feature.sourceLayer] （可选项）*矢量资源的资源图层是必须的。*
+     * @param {string} [feature.id] 要素唯一的ID。
      *
-     * @returns {Object} The state of the feature.
+     * @returns {Object} 要素的状态。
+     * 
      */
     getFeatureState(feature: { source: string; sourceLayer?: string; id: string; }): any {
         return this.style.getFeatureState(feature);
     }
 
     /**
-     * Returns the map's containing HTML element.
+     * 返回地图包含的HTML元素。
      *
-     * @returns {HTMLElement} The map's container.
+     * @returns {HTMLElement} 地图对象容器。
      */
     getContainer() {
         return this._container;
     }
 
     /**
-     * Returns the HTML element containing the map's `<canvas>` element.
+     * 返回包含地图`<canvas>`元素的HTML元素。
+     * 
+     * 如果你想要添加非-GL的覆盖在这个地图上，你应该将这些内容添加在这个元素中。
+     * 
+     * 这个元素绑定了地图操作（如平移和缩放）事件。它接受子元素例如`<canvas>`的冒泡事件，但是不接受地图控制的冒泡事件。
      *
-     * If you want to add non-GL overlays to the map, you should append them to this element.
-     *
-     * This is the element to which event bindings for map interactivity (such as panning and zooming) are
-     * attached. It will receive bubbled events from child elements such as the `<canvas>`, but not from
-     * map controls.
-     *
-     * @returns {HTMLElement} The container of the map's `<canvas>`.
-     * @see [Create a draggable point](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
-     * @see [Highlight features within a bounding box](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
+     * @returns {HTMLElement} 地图`<canvas>`的容器。
+     * @see [创建可拖动的点](https://www.mapbox.com/mapbox-gl-js/example/drag-a-point/)
+     * @see [高亮元素边界](https://www.mapbox.com/mapbox-gl-js/example/using-box-queryrenderedfeatures/)
      */
     getCanvasContainer() {
         return this._canvasContainer;
     }
 
     /**
-     * Returns the map's `<canvas>` element.
+     * 返回地图的“<canvas>”元素
      *
-     * @returns {HTMLCanvasElement} The map's `<canvas>` element.
-     * @see [Measure distances](https://www.mapbox.com/mapbox-gl-js/example/measure/)
-     * @see [Display a popup on hover](https://www.mapbox.com/mapbox-gl-js/example/popup-on-hover/)
-     * @see [Center the map on a clicked symbol](https://www.mapbox.com/mapbox-gl-js/example/center-on-symbol/)
+     * @returns {HTMLCanvasElement} 地图的“<canvas>”元素
+     * @see [测量距离](https://www.mapbox.com/mapbox-gl-js/example/measure/)
+     * @see [显示悬停弹出窗口](https://www.mapbox.com/mapbox-gl-js/example/popup-on-hover/)
+     * @see [点击标志使得地图居中显示](https://www.mapbox.com/mapbox-gl-js/example/center-on-symbol/)
      */
     getCanvas() {
         return this._canvas;
@@ -1562,13 +1540,11 @@ class Map extends Camera {
     }
 
     /**
-     * Returns a Boolean indicating whether the map is fully loaded.
+     * 返回地图是否完全加载的标识。
      *
-     * Returns `false` if the style is not yet fully loaded,
-     * or if there has been a change to the sources or style that
-     * has not yet fully loaded.
+     * 如果样式没有完全加载，或者资源或样式没有被完全加载时候发生了修改，则返回“false“
      *
-     * @returns {boolean} A Boolean indicating whether the map is fully loaded.
+     * @returns {boolean} 地图是否被完全加载的标识。
      */
     loaded() {
         if (this._styleDirty || this._sourcesDirty)
@@ -1579,10 +1555,10 @@ class Map extends Camera {
     }
 
     /**
-     * Update this map's style and sources, and re-render the map.
+     * 更新地图的样式和资源，同时重绘地图。
      *
-     * @param {boolean} updateStyle mark the map's style for reprocessing as
-     * well as its sources
+     * @param {boolean} 地图的重新绘制的样式资源
+     *  
      * @returns {Map} this
      * @private
      */
@@ -1596,9 +1572,9 @@ class Map extends Camera {
     }
 
     /**
-     * Request that the given callback be executed during the next render
-     * frame.  Schedule a render frame if one is not already scheduled.
-     * @returns An id that can be used to cancel the callback
+     * 下一帧绘制时候会被调用。如果尚未开始渲染则开始渲染。
+     * 
+     * @returns 用来取消回调的一个ID。
      * @private
      */
     _requestRenderFrame(callback: () => void): TaskID {
@@ -1611,11 +1587,11 @@ class Map extends Camera {
     }
 
     /**
-     * Call when a (re-)render of the map is required:
-     * - The style has changed (`setPaintProperty()`, etc.)
-     * - Source data has changed (e.g. tiles have finished loading)
-     * - The map has is moving (or just finished moving)
-     * - A transition is in progress
+     * 地图绘制时候会调用这个方法。
+     * - 样式改变（`setPaintProperty()`，等）
+     * - 资源被修改（例如，瓦片加载完毕后）
+     * - 地图被移动（或者刚刚完成移动）
+     * - 进度改变
      *
      * @returns {Map} this
      * @private
@@ -1694,13 +1670,11 @@ class Map extends Camera {
     }
 
     /**
-     * Clean up and release all internal resources associated with this map.
+     * 清理释放地图的所有内置资源。
      *
-     * This includes DOM elements, event bindings, web workers, and WebGL resources.
+     * 这包含 DOM元素，事件绑定，网页进程，和 WebGL资源。
      *
-     * Use this method when you are done using the map and wish to ensure that it no
-     * longer consumes browser resources. Afterwards, you must not call any other
-     * methods on the map.
+     * 当你确定不在使用地图同时需要释放浏览器资源时候使用这个方法。之后，你将不能调用地图上的任何方法。
      */
     remove() {
         if (this._hash) this._hash.remove();
@@ -1743,9 +1717,9 @@ class Map extends Camera {
     }
 
     /**
-     * Gets and sets a Boolean indicating whether the map will render an outline
-     * around each tile. These tile boundaries are useful for debugging.
-     *
+     * 获取和设置一个布尔值标识，控制地图是否绘制每一个瓦片的外边界。
+     * 这些外边界对于调试非常有用。
+     * 
      * @name showTileBoundaries
      * @type {boolean}
      * @instance
@@ -1759,10 +1733,9 @@ class Map extends Camera {
     }
 
     /**
-     * Gets and sets a Boolean indicating whether the map will render boxes
-     * around all symbols in the data source, revealing which symbols
-     * were rendered or which were hidden due to collisions.
-     * This information is useful for debugging.
+     * 获取和设置一个布尔值标识，控制地图是否绘制资源中所有标志的外边界，
+     * 当标志被绘制的时候显示或者当碰撞时候隐藏。
+     * 这条信息对于调试非常有用。
      *
      * @name showCollisionBoxes
      * @type {boolean}
@@ -1784,11 +1757,10 @@ class Map extends Camera {
     }
 
     /*
-     * Gets and sets a Boolean indicating whether the map should color-code
-     * each fragment to show how many times it has been shaded.
-     * White fragments have been shaded 8 or more times.
-     * Black fragments have been shaded 0 times.
-     * This information is useful for debugging.
+     * 获取和设置一个布尔值标识，控制地图是否应对每一个片段显示被遮盖的次数。
+     * 白色片段被遮盖 8次或者更多次。
+     * 黑色片段被遮盖 0次。
+     * 这条信息对于调试非常有用。
      *
      * @name showOverdraw
      * @type {boolean}
@@ -1803,9 +1775,8 @@ class Map extends Camera {
     }
 
     /**
-     * Gets and sets a Boolean indicating whether the map will
-     * continuously repaint. This information is useful for analyzing performance.
-     *
+     * 获取和设置一个布尔值标识，控制地图是否连续重新绘制。这个信息对于分析工作非常有用。
+     * 
      * @name repaint
      * @type {boolean}
      * @instance
@@ -1837,18 +1808,14 @@ function removeNode(node) {
 }
 
 /**
- * Interface for interactive controls added to the map. This is an
- * specification for implementers to model: it is not
- * an exported method or class.
+ * 添加到地图的交互式控件。这是实施者模型一个范例：它不是一个可导出的方法或者类。
  *
- * Controls must implement `onAdd` and `onRemove`, and must own an
- * element, which is often a `div` element. To use Mapbox GL JS's
- * default control styling, add the `mapboxgl-ctrl` class to your control's
- * node.
+ * 控制器必须继承`onAdd` 和 `onRemove`，同时必须拥有一个元素，通常是“div”元素。使用Mapbox GL JS
+ * 的默认控制器样式，需要为自己的控制节点添加`mapboxgl-ctrl`类。
  *
  * @interface IControl
  * @example
- * // Control implemented as ES6 class
+ * // 使用 ES6 实现的控件
  * class HelloWorldControl {
  *     onAdd(map) {
  *         this._map = map;
@@ -1864,7 +1831,7 @@ function removeNode(node) {
  *     }
  * }
  *
- * // Control implemented as ES5 prototypical class
+ * // 使用 ES5 的原型类型实现控件
  * function HelloWorldControl() { }
  *
  * HelloWorldControl.prototype.onAdd = function(map) {
@@ -1882,56 +1849,49 @@ function removeNode(node) {
  */
 
 /**
- * Register a control on the map and give it a chance to register event listeners
- * and resources. This method is called by {@link Map#addControl}
- * internally.
+ * 为地图注册一个控制器，同时为它注册一个事件监听器和资源。这个方法被 {@link Map#addControl}回调。
  *
  * @function
  * @memberof IControl
  * @instance
  * @name onAdd
- * @param {Map} map the Map this control will be added to
- * @returns {HTMLElement} The control's container element. This should
- * be created by the control and returned by onAdd without being attached
- * to the DOM: the map will insert the control's element into the DOM
- * as necessary.
+ * @param {Map} map 添加控制器的地图。
+ * 
+ * @returns {HTMLElement} 这应该由控件创建，并由onAdd返回而不附加到DOM：地图将根据需要将控件的元素插入DOM。
  */
 
 /**
- * Unregister a control on the map and give it a chance to detach event listeners
- * and resources. This method is called by {@link Map#removeControl}
- * internally.
+ * 为地图取消注册一个控制器，同时为它取消一个事件监听器和资源。这个方法被 {@link Map#removeControl}回调。
  *
  * @function
  * @memberof IControl
  * @instance
  * @name onRemove
- * @param {Map} map the Map this control will be removed from
- * @returns {undefined} there is no required return value for this method
+ * @param {Map} map 移除注册的地图
+ * 
+ * @returns {undefined} 这个方法没有必须的返回值。
  */
 
 /**
- * Optionally provide a default position for this control. If this method
- * is implemented and {@link Map#addControl} is called without the `position`
- * parameter, the value returned by getDefaultPosition will be used as the
- * control's position.
+ * 为控制器提供一个默认的位置。如果这个方法被继承，同时不包含“position”参数的方法
+ * {@link Map#addControl}将会被调用，方法getDefaultPosition返回值将会作为控制器的位置参数。、
  *
  * @function
  * @memberof IControl
  * @instance
  * @name getDefaultPosition
- * @returns {string} a control position, one of the values valid in addControl.
+ * @returns {string} 控制器的位置，addControl的一个有效值。
+ * 
  */
 
 /**
- * A [`Point` geometry](https://github.com/mapbox/point-geometry) object, which has
- * `x` and `y` properties representing screen coordinates in pixels.
- *
+ * [点对象](https://github.com/mapbox/point-geometry)，以像素为单位的屏幕x和y坐标。
+ * 
+
  * @typedef {Object} Point
  */
 
 /**
- * A {@link Point} or an array of two numbers representing `x` and `y` screen coordinates in pixels.
- *
+ * 点对象{@link Point} 或者是以像素为单位的屏幕x和y坐标的数组。
  * @typedef {(Point | Array<number>)} PointLike
  */

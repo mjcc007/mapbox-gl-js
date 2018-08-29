@@ -1,6 +1,6 @@
 /*---
-title: Toggle interactions
-description: Enable or disable UI handlers on a map.
+title: 切换交互
+description: 在地图上启用或禁用UI处理程序。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/toggle-interaction-handlers/

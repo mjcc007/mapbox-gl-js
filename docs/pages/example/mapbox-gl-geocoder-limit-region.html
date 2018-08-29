@@ -13,20 +13,18 @@ var map = new mapboxgl.Map({
 map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
 
-    // limit results to Australia
+    // 限制搜索结果在澳大利亚内
     country: 'au',
 
-    // further limit results to the geographic bounds representing the region of
-    // New South Wales
+    // 进一步限制搜索结果在新南威尔士州的地理范围内
     bbox: [139.965, -38.030, 155.258, -27.839],
 
-    // apply a client side filter to further limit results to those strictly within
-    // the New South Wales region
+    // 应用客户端过滤器去进一步严格限制搜索结果在新南威尔士州区域内
     filter: function (item) {
-        // returns true if item contains New South Wales region
+        // 返回 true 如果 item 包含新南威尔士州区域
         return item.context.map(function (i) {
-            // id is in the form {index}.{id} per https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
-            // this example attempts to find the `region` named `New South Wales`
+            // id 的获取格式为 {index}.{id} 根据 https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+            // 本例子试图搜寻名称为 `New South Wales` 的 `region` 
             return (i.id.split('.').shift() === 'region' && i.text === 'New South Wales');
         }).reduce(function (acc, cur) {
             return acc || cur;

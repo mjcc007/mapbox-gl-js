@@ -1,6 +1,6 @@
 /*---
-title: Create a hover effect
-description: Using events and [feature states](/mapbox-gl-js/api/#map#setfeaturestate) to create a per feature hover effect
+title: 创建悬停效果
+description: 使用事件和 [feature states](/mapbox-gl-js/api/#map#setfeaturestate) 来创建每个特征悬停效果
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/hover-styles/

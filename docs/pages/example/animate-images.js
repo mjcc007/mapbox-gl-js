@@ -1,6 +1,6 @@
 /*---
-title: Animate a series of images
-description: Use a series of [image sources](/mapbox-gl-js/style-spec#sources-image) to create an animation.
+title: 动态显示一系列的地图图像
+description: 使用一系列[图片资源](/mapbox-gl-js/style-spec#sources-image) 来制作一个动态地图动画。
 tags:
   - layers
   - sources

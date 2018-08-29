@@ -1,8 +1,6 @@
 /*---
-title: Create a draggable point
-description: >-
-  Drag the point to a new location on a map and populates its coordinates in a
-  display.
+title: 创建可拖动的点
+description: 将该点拖动到地图上的新位置，并在显示中填入其坐标。
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/drag-a-point/

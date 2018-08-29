@@ -1,6 +1,6 @@
 /*---
-title: Join local JSON data with vector tile geometries
-description: Style a choropleth by merging local JSON data with vector tile geometries
+title: 载入带有矢量切片几何图形的本地JSON数据
+description: 通过合成本地JSON数据与矢量切片几何图形来设置等高线
 tags:
   - sources
 pathname: /mapbox-gl-js/example/data-join/
