@@ -1,6 +1,6 @@
 /*---
-title: Display a satellite map
-description: Satellite raster baselayer.
+title: 展示卫星地图
+description: 卫星光栅基层。
 tags:
   - styles
 pathname: /mapbox-gl-js/example/satellite-map/
