@@ -1,6 +1,6 @@
 /*---
-title: Play map locations as a slideshow
-description: Autoplay the locations of boroughs in New York City
+title: 幻灯片式地展示地图上的位置
+description: 自动展示纽约各行政区所在位置
 tags:
   - camera
 pathname: /mapbox-gl-js/example/playback-locations/

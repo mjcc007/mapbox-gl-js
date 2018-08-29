@@ -1,6 +1,6 @@
 /*---
-title: Animate a marker
-description: Animate the position of a [`Marker`](/mapbox-gl-js/api/#marker) by updating its location on each frame.
+title: 让Marker标记动起来
+description: 通过每一帧更新一次 [`Marker`](/mapbox-gl-js/api/#marker) 的位置来让它动起来
 tags:
   - controls-and-overlays
 pathname: /mapbox-gl-js/example/animate-marker/

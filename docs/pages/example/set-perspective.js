@@ -1,8 +1,7 @@
 /*---
-title: Set pitch and bearing
+title: 设置俯仰角和方位
 description: >-
-  Map options extend [`CameraOptions`](/mapbox-gl-js/api/#cameraoptions), so
-  you can set more than just center and zoom
+  地图选项扩展自 [`CameraOptions`](/mapbox-gl-js/api/#cameraoptions) ，所以可用的设置项不单单只是设置中心点和变焦级别而已
 tags:
   - camera
 pathname: /mapbox-gl-js/example/set-perspective/

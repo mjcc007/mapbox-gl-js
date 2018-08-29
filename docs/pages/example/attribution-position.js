@@ -1,7 +1,7 @@
 /*---
-title: Change the default position for attribution
+title: 设置版权信息标签位置
 description: >-
-  Place attribution in the `top-left` position when initializing a map.
+  初始化地图时将版权信息标签放置在 `top-left` 位置。
 tags:
   - controls-and-overlays
 pathname: /mapbox-gl-js/example/attribution-position/
