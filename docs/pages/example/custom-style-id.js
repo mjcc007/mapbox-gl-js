@@ -1,6 +1,6 @@
 /*---
-title: Display a map with a custom style
-description: Using a custom Mapbox-hosted style.
+title: 显示具有自定义样式的地图
+description: 使用自定义Mapbox托管的样式。
 tags:
   - styles
 pathname: /mapbox-gl-js/example/custom-style-id/
