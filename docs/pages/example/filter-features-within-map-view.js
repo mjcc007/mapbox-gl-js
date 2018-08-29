@@ -1,8 +1,7 @@
 /*---
-title: Filter features within map view
+title: 过滤地图视图中的功能
 description: >-
-  Move the map to query viewable features in a vector tile layer and filter by
-  typing in an input
+  移动地图以查询矢量切片图层中的可查看特征，并通过输入进行过滤
 tags:
   - user-interaction
 pathname: /mapbox-gl-js/example/filter-features-within-map-view/
