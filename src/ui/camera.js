@@ -332,15 +332,15 @@ class Camera extends Evented {
     getPitch(): number { return this.transform.pitch; }
 
     /**
-     * Sets the map's pitch (tilt). Equivalent to `jumpTo({pitch: pitch})`.
+     * 设置地图的轴向角（倾斜度）。相当于`jumpTo（{pitch：pitch}）`。
      *
-     * @memberof Map#
-     * @param pitch The pitch to set, measured in degrees away from the plane of the screen (0-60).
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * @memberof Map＃
+     * @param pitch 要设置的轴向角，以度数为单位，远离屏幕平面（0-60）。
+     * @param eventData 要添加到此方法触发的事件的事件对象的其他属性。
      * @fires pitchstart
      * @fires movestart
      * @fires moveend
-     * @returns {Map} `this`
+     * @returns {Map}`this`
      */
     setPitch(pitch: number, eventData?: Object) {
         this.jumpTo({pitch: pitch}, eventData);
@@ -349,16 +349,13 @@ class Camera extends Evented {
 
     /**
      * @memberof Map#
-     * @param bounds Calculate the center for these bounds in the viewport and use
-     *      the highest zoom level up to and including `Map#getMaxZoom()` that fits
-     *      in the viewport.
+     * @param bounds 在视口中计算这些边界的中心并使用最高缩放级别，包括视口中适合的`Map#getMaxZoom()`。
      * @param options
-     * @param {number | PaddingOptions} [options.padding] The amount of padding in pixels to add to the given bounds.
-     * @param {PointLike} [options.offset=[0, 0]] The center of the given bounds relative to the map's center, measured in pixels.
-     * @param {number} [options.maxZoom] The maximum zoom level to allow when the camera would transition to the specified bounds.
-     * @returns {CameraOptions | void} If map is able to fit to provided bounds, returns `CameraOptions` with
-     *      at least `center`, `zoom`, `bearing`, `offset`, `padding`, and `maxZoom`, as well as any other
-     *      `options` provided in arguments. If map is unable to fit, method will warn and return undefined.
+     * @param {number | PaddingOptions} [options.padding] 要添加到给定边界的填充量（以像素为单位）。
+     * @param {PointLike} [options.offset=[0, 0]] 相对于地图中心的给定边界的中心，以像素为单位。
+     * @param {number} [options.maxZoom] 当摄像机转换到指定范围时允许的最大缩放级别。
+     * @returns {CameraOptions | void} 如果地图能够适合提供的边界，则返回带有`center`，`zoom`，`bearing`，`offset`，`padding`和`maxZoom`的`CameraOptions`，以及任何其他
+     *    参数中提供的`options`。如果地图无法拟合，则方法将发出警告并返回未定义
      * @example
      * var bbox = [[-79, 43], [-73, 45]];
      * var newCameraTransform = map.cameraForBounds(bbox, {
@@ -398,11 +395,11 @@ class Camera extends Evented {
         }
 
         bounds = LngLatBounds.convert(bounds);
-
-        // we separate the passed padding option into two parts, the part that does not affect the map's center
-        // (lateral and vertical padding), and the part that does (paddingOffset). We add the padding offset
-        // to the options `offset` object where it can alter the map's center in the subsequent calls to
-        // `easeTo` and `flyTo`.
+        
+        // 我们将传递的填充选项分成两部分，即不影响地图中心的部分
+        //（横向和垂直填充），以及执行的部分（paddingOffset）。我们添加填充偏移量
+        // 选择`offset`对象，它可以在后续调用中改变地图的中心
+        // `easeTo`和`flyTo`。
         const paddingOffset = [(options.padding.left - options.padding.right) / 2, (options.padding.top - options.padding.bottom) / 2],
             lateralPadding = Math.min(options.padding.right, options.padding.left),
             verticalPadding = Math.min(options.padding.top, options.padding.bottom);
@@ -431,21 +428,21 @@ class Camera extends Evented {
     }
 
     /**
-     * Pans and zooms the map to contain its visible area within the specified geographical bounds.
-     * This function will also reset the map's bearing to 0 if bearing is nonzero.
+     * 平移和缩放地图以包含指定地理范围内的可见区域。
+     * 如果轴向角非零，此功能还会将地图的方位重置为0。
      *
      * @memberof Map#
-     * @param bounds Center these bounds in the viewport and use the highest
-     *      zoom level up to and including `Map#getMaxZoom()` that fits them in the viewport.
+     * @param bounds 将这些边界居中在视口中并使用最高的边界
+     *   缩放级别，包括适合视口的“Map＃getMaxZoom（）”。
      * @param options
-     * @param {number | PaddingOptions} [options.padding] The amount of padding in pixels to add to the given bounds.
-     * @param {boolean} [options.linear=false] If `true`, the map transitions using
-     *     {@link Map#easeTo}. If `false`, the map transitions using {@link Map#flyTo}. See
-     *     those functions and {@link AnimationOptions} for information about options available.
-     * @param {Function} [options.easing] An easing function for the animated transition. See {@link AnimationOptions}.
-     * @param {PointLike} [options.offset=[0, 0]] The center of the given bounds relative to the map's center, measured in pixels.
-     * @param {number} [options.maxZoom] The maximum zoom level to allow when the map view transitions to the specified bounds.
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * @param {number | PaddingOptions} [options.padding] 要添加到给定边界的填充量（以像素为单位）。
+     * @param {boolean} [options.linear=false] 如果为“true”，则地图转换为
+     *   {@link Map＃easeTo}。如果是`false`，则使用{@link Map＃flyTo}转换地图。
+     *   这些函数和{@link AnimationOptions}提供有关可用选项的信息。
+     * @param {Function} [options.easing] 动画过渡的缓动功能。请参阅{@link AnimationOptions}。
+     * @param {PointLike} [options.offset=[0, 0]] 相对于地图中心的给定边界的中心，以像素为单位。
+     * @param {number} [options.maxZoom] 地图视图转换为指定边界时允许的最大缩放级别。
+     * @param eventData 要添加到此方法触发的事件的事件对象的其他属性。
      * @fires movestart
      * @fires moveend
      * @returns {Map} `this`
@@ -470,13 +467,13 @@ class Camera extends Evented {
     }
 
     /**
-     * Changes any combination of center, zoom, bearing, and pitch, without
-     * an animated transition. The map will retain its current values for any
-     * details not specified in `options`.
+     * 不改变中心，变焦，方位和轴向的任何组合
+     * 动画过渡。地图将保留其当前值
+     * 详细信息未在`options`中指定。
      *
      * @memberof Map#
      * @param options
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * @param eventData 要添加到此方法触发的事件的事件对象的其他属性。
      * @fires movestart
      * @fires zoomstart
      * @fires pitchstart
@@ -540,15 +537,15 @@ class Camera extends Evented {
         return this.fire(new Event('moveend', eventData));
     }
 
-    /**
-     * Changes any combination of center, zoom, bearing, and pitch, with an animated transition
-     * between old and new values. The map will retain its current values for any
-     * details not specified in `options`.
+
+     /**
+     * 通过动画过渡更改中心，缩放，方位和轴向的任意组合
+     * 新旧数值之间。地图将保留其当前值
+     * 详细信息未在`options`中指定。
      *
      * @memberof Map#
-     * @param options Options describing the destination and animation of the transition.
-     *            Accepts {@link CameraOptions} and {@link AnimationOptions}.
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * @param options 描述转换的目标和动画的选项。接受{@link CameraOptions}和{@link AnimationOptions}。
+     * @param eventData 要添加到此方法触发的事件的事件对象的其他属性。
      * @fires movestart
      * @fires zoomstart
      * @fires pitchstart
@@ -694,32 +691,26 @@ class Camera extends Evented {
     }
 
     /**
-     * Changes any combination of center, zoom, bearing, and pitch, animating the transition along a curve that
-     * evokes flight. The animation seamlessly incorporates zooming and panning to help
-     * the user maintain her bearings even after traversing a great distance.
+
+     * 改变中心，缩放，方位和轴向的任意组合，使曲线的过渡动画化
+     * 唤起飞行，动画无缝地结合缩放和平移来提供帮助
+     * 即使经过很远的距离，用户也能保持轴向。
      *
      * @memberof Map#
-     * @param {Object} options Options describing the destination and animation of the transition.
-     *     Accepts {@link CameraOptions}, {@link AnimationOptions},
-     *     and the following additional options.
-     * @param {number} [options.curve=1.42] The zooming "curve" that will occur along the
-     *     flight path. A high value maximizes zooming for an exaggerated animation, while a low
-     *     value minimizes zooming for an effect closer to {@link Map#easeTo}. 1.42 is the average
-     *     value selected by participants in the user study discussed in
-     *     [van Wijk (2003)](https://www.win.tue.nl/~vanwijk/zoompan.pdf). A value of
-     *     `Math.pow(6, 0.25)` would be equivalent to the root mean squared average velocity. A
-     *     value of 1 would produce a circular motion.
-     * @param {number} [options.minZoom] The zero-based zoom level at the peak of the flight path. If
-     *     `options.curve` is specified, this option is ignored.
-     * @param {number} [options.speed=1.2] The average speed of the animation defined in relation to
-     *     `options.curve`. A speed of 1.2 means that the map appears to move along the flight path
-     *     by 1.2 times `options.curve` screenfuls every second. A _screenful_ is the map's visible span.
-     *     It does not correspond to a fixed physical distance, but varies by zoom level.
-     * @param {number} [options.screenSpeed] The average speed of the animation measured in screenfuls
-     *     per second, assuming a linear timing curve. If `options.speed` is specified, this option is ignored.
-     * @param {number} [options.maxDuration] The animation's maximum duration, measured in milliseconds.
-     *     If duration exceeds maximum duration, it resets to 0.
-     * @param eventData Additional properties to be added to event objects of events triggered by this method.
+     * @param {Object} options描述转换的目标和动画的选项。接受{@link CameraOptions}，{@ link AnimationOptions}，和以下附加选项。
+     * @param {number} [options.curve=1.42] 缩放的“曲线”将沿着飞行路径。较高的值可以最大化缩放动画，而夸张的动画则较低。
+     * 值最小化缩放效果，接近{@link Map＃easeTo}。 1.42是平均值。
+     * 参与者在用户研究中选择的价值
+     * [van Wijk（2003）]（https://www.win.tue.nl/~vanwijk/zoompan.pdf）。价值`Math.pow（6,0.25）`相当于均方根平均速度。值为1会产生圆周运动。
+     * @param {number} [options.minZoom] 飞行路径峰值处的从零开始的缩放级别。如果指定了`options.curve`，忽略此选项。
+     * @param {number} [options.speed=1.2] 相对于动画定义的平均动画速度`options.curve`。速度为1.2意味着地图似乎沿着飞行路径移动
+     * 每秒1.2次`options.curve`屏幕。 _screenful_是地图的可见范围。
+     * 它与固定的物理距离不对应，但因缩放级别而异。
+     * @param {number} [options.screenSpeed] 在屏幕中测量动画的平均速度
+     * 每秒，假设线性时序曲线。如果指定了“options.speed”，则忽略此选项。
+     * @param {number} [options.maxDuration] 动画的最大持续时间，以毫秒为单位。
+     *   如果持续时间超过最大持续时间，则重置为0。
+     * @param eventData 要添加到此方法触发的事件的事件对象的其他属性。
      * @fires movestart
      * @fires zoomstart
      * @fires pitchstart
@@ -749,13 +740,13 @@ class Camera extends Evented {
      * @see [Fly to a location based on scroll position](https://www.mapbox.com/mapbox-gl-js/example/scroll-fly-to/)
      */
     flyTo(options: Object, eventData?: Object) {
-        // This method implements an “optimal path” animation, as detailed in:
+         //此方法实现“最佳路径”动画，详见：
         //
-        // Van Wijk, Jarke J.; Nuij, Wim A. A. “Smooth and efficient zooming and panning.” INFOVIS
-        //   ’03. pp. 15–22. <https://www.win.tue.nl/~vanwijk/zoompan.pdf#page=5>.
+        // Van Wijk，Jarke J.; Nuij，Wim A. A.“平滑有效的缩放和平移。”INFOVIS
+        // '03第15-22页。 <https://www.win.tue.nl/~vanwijk/zoompan.pdf#page=5>。
         //
-        // Where applicable, local variable documentation begins with the associated variable or
-        // function in van Wijk (2003).
+        // 在适用的情况下，局部变量文档以关联的变量或开头
+        // 在van Wijk（2003）中的功能。
 
         this.stop();
 
@@ -786,18 +777,18 @@ class Camera extends Evented {
 
         let rho = options.curve;
 
-        // w₀: Initial visible span, measured in pixels at the initial scale.
+        // w₀: 初始可见跨度，以初始比例的像素为单位。
         const w0 = Math.max(tr.width, tr.height),
-            // w₁: Final visible span, measured in pixels with respect to the initial scale.
+            // w₁: 最终可见跨度，以像素为单位测量初始比例。
             w1 = w0 / scale,
-            // Length of the flight path as projected onto the ground plane, measured in pixels from
-            // the world image origin at the initial scale.
+            // 投影到地平面上的飞行路径长度，以像素为单位测量
+            // 世界图像起源于初始尺度。
             u1 = delta.mag();
 
         if ('minZoom' in options) {
             const minZoom = clamp(Math.min(options.minZoom, startZoom, zoom), tr.minZoom, tr.maxZoom);
-            // w<sub>m</sub>: Maximum visible span, measured in pixels with respect to the initial
-            // scale.
+            // w<sub>m</sub>: 最大可见跨度，以像素为单位，相对于初始值
+            // 规模
             const wMax = w0 / tr.zoomScale(minZoom - startZoom);
             rho = Math.sqrt(wMax / u1 * 2);
         }
@@ -806,7 +797,7 @@ class Camera extends Evented {
         const rho2 = rho * rho;
 
         /**
-         * rᵢ: Returns the zoom-out factor at one end of the animation.
+         * rᵢ: 返回动画一端的缩小系数。
          *
          * @param i 0 for the ascent or 1 for the descent.
          * @private
@@ -820,27 +811,27 @@ class Camera extends Evented {
         function cosh(n) { return (Math.exp(n) + Math.exp(-n)) / 2; }
         function tanh(n) { return sinh(n) / cosh(n); }
 
-        // r₀: Zoom-out factor during ascent.
+        // r₀: 上升时的缩小系数。
         const r0 = r(0);
 
-        // w(s): Returns the visible span on the ground, measured in pixels with respect to the
-        // initial scale. Assumes an angular field of view of 2 arctan ½ ≈ 53°.
+        // w(s): 返回地面上的可见范围，以像素为单位测量
+        // 初始比例假设2arctan½≈53°的角视场。
         let w: (number) => number = function (s) {
             return (cosh(r0) / cosh(r0 + rho * s));
         };
 
-        // u(s): Returns the distance along the flight path as projected onto the ground plane,
-        // measured in pixels from the world image origin at the initial scale.
+        // u(s): 返回投影到地平面上沿飞行路径的距离，
+        //以初始比例从世界图像原点以像素为单位进行测量。
         let u: (number) => number = function (s) {
             return w0 * ((cosh(r0) * tanh(r0 + rho * s) - sinh(r0)) / rho2) / u1;
         };
 
-        // S: Total length of the flight path, measured in ρ-screenfuls.
+        // S: 飞行路径的总长度，以ρ-screenfuls为单位。
         let S = (r(1) - r0) / rho;
 
-        // When u₀ = u₁, the optimal path doesn’t require both ascent and descent.
+        // 当u₀ = u₁时，最佳路径不需要上升和下降。
         if (Math.abs(u1) < 0.000001 || !isFinite(S)) {
-            // Perform a more or less instantaneous transition if the path is too short.
+            // 如果路径太短，则执行或多或少的瞬时转换。
             if (Math.abs(w0 - w1) < 0.000001) return this.easeTo(options, eventData);
 
             const k = w1 < w0 ? -1 : 1;
@@ -868,7 +859,7 @@ class Camera extends Evented {
         this._prepareEase(eventData, false);
 
         this._ease((k) => {
-            // s: The distance traveled along the flight path, measured in ρ-screenfuls.
+            // s: 沿着飞行路径行进的距离，以ρ-屏幕测量。
             const s = k * S;
             const scale = 1 / w(s);
             tr.zoom = k === 1 ? zoom : startZoom + tr.scaleZoom(scale);
@@ -895,7 +886,7 @@ class Camera extends Evented {
     }
 
     /**
-     * Stops any animated transition underway.
+     * 停止正在进行的任何动画过渡。
      *
      * @memberof Map#
      * @returns {Map} `this`
@@ -908,9 +899,9 @@ class Camera extends Evented {
         }
 
         if (this._onEaseEnd) {
-            // The _onEaseEnd function might emit events which trigger new
-            // animation, which sets a new _onEaseEnd. Ensure we don't delete
-            // it unintentionally.
+             // _onEaseEnd函数可能会发出触发new的事件
+            // 动画，它设置一个新的_onEaseEnd。确保我们不删除
+            // t unintentionally.
             const onEaseEnd = this._onEaseEnd;
             delete this._onEaseEnd;
             onEaseEnd.call(this);
@@ -944,7 +935,7 @@ class Camera extends Evented {
         }
     }
 
-    // convert bearing so that it's numerically close to the current one so that it interpolates properly
+    // 转换方位，使其在数值上接近当前方位，以便正确插补
     _normalizeBearing(bearing: number, currentBearing: number) {
         bearing = wrap(bearing, -180, 180);
         const diff = Math.abs(bearing - currentBearing);
@@ -953,8 +944,9 @@ class Camera extends Evented {
         return bearing;
     }
 
-    // If a path crossing the antimeridian would be shorter, extend the final coordinate so that
-    // interpolating between the two endpoints will cross it.
+
+    //如果穿过antimeridian的路径较短，则扩展最终坐标
+    //在两个端点之间插值将穿过它。
     _normalizeCenter(center: LngLat) {
         const tr = this.transform;
         if (!tr.renderWorldCopies || tr.lngRange) return;
