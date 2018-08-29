@@ -967,7 +967,7 @@ export default class extends React.Component {
                             <a id='expressions' className='anchor'/>
                             <h2><a href='#expressions' title='link to expressions'>Expressions</a></h2>
 
-                            <p><p><a href="#layout-property">布局属性</a>, <a
+                            <p><a href="#layout-property">布局属性</a>, <a
                                 href="#paint-property">paint property</a>或 <a href="#layer-filter">filter</a> 的任何数值可被指定为
                                 <em>expression</em>。 表达确定下文使用<em>operators</em> 属性计算数值的公式。Mapbox GL提供的表达运算符集合包括：
                             </p>
@@ -1111,7 +1111,7 @@ export default class extends React.Component {
 
                              <p>使用数据和摄像机运算符的表达式被视为数据表达式和摄像机表达式，必须遵守上文规定的限制。</p>
 
-                            <h3>类型系统/h3>
+                            <h3>类型系统</h3>
                            <p>表达式的输入参数以及其结果数值用<a
                                 href="#types">types</a>的同一集合作为样式规范的其他部分： 这些类型的布尔值、字符串、颜色和数组。此外， 表达式为： <em>type safe</em>:
                                 表达式的每次使用均有结果类型和要求的参数类型，并且
@@ -1385,7 +1385,7 @@ export default class extends React.Component {
 
                                     <p><em>layout</em> 和 <em>paint</em>特性的缩放函数渲染方式存在很大的不同。缩放比例变动时，即使是微小的变动，也要对绘画特性继续重新计算数值。 例如，随着地图在缩放比例<code>4.1</code> 和 <code>4.6</code>之间变动，绘画特性的渲染数值也会变动。在另一方面，每个整数缩放比例，只对布局属性计算一次。继续上面的例子：无论指定什么停顿，布局属性的渲染会在<em>not</em> 缩放比例 <code>4.1</code> 和 <code>4.6</code>之间变动；但是缩放比例为 <code>5</code>，会根据函数重新计算函数，并且属性的渲染值会变动。（可在布局属性缩放函数中包括小数缩放比例，并且会将影响生成的数值；但是，渲染仍只有是缩放比例为整数时变动。）</p>
                                     
-                                    <p><strong>属性函数</strong>呈现地图特征随着其属性变动而变动。 属性函数可用作可视化区分同一层级内的特征类型或进行数据可视化。每个停顿为带两个元素的数组：第一个元素是属性输入数值，第二个是函数输出数值。注意此时所有属性和平台不能使用属性函数支持。
+                                    <p><strong>属性函数</strong>呈现地图特征随着其属性变动而变动。 属性函数可用作可视化区分同一层级内的特征类型或进行数据可视化。每个停顿为带两个元素的数组：第一个元素是属性输入数值，第二个是函数输出数值。注意此时所有属性和平台不能使用属性函数支持。</p>
 
                                     <div className='col12 space-bottom'>
                                         {highlightJSON(`
