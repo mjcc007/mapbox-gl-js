@@ -7,12 +7,12 @@
       "values": [
         8
       ],
-      "doc": "Style specification version number. Must be 8.",
+      "doc": "样式规范版本号。必须是8。",
       "example": 8
     },
     "name": {
       "type": "string",
-      "doc": "A human-readable name for the style.",
+      "doc": "样式的可读名称",
       "example": "Bright"
     },
     "metadata": {
