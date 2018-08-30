@@ -469,7 +469,7 @@ export default class extends React.Component {
                             <a id='light' className='anchor'/>
                             <h2><a href='#light' title='link to light'>Light</a></h2>
                             <p>
-                                A style's <code>light</code> property provides global light source for that style.
+                                <code>light</code>属性为样式提供全局光源。
                             </p>
                             <div className='space-bottom1 pad2x clearfix'>
                                 {highlightJSON(`"light": ${JSON.stringify(ref.$root.light.example, null, 2)}`)}
