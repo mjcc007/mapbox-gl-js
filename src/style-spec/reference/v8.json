@@ -932,7 +932,7 @@
     "symbol-avoid-edges": {
       "type": "boolean",
       "default": false,
-      "doc": "If true, the symbols will not cross tile edges to avoid mutual collisions. Recommended in layers that don't have enough padding in the vector tile to prevent collisions, or if it is a point symbol layer placed after a line symbol layer.",
+      "doc": "如果为true, the symbols will not cross tile edges to avoid mutual collisions. Recommended in layers that don't have enough padding in the vector tile to prevent collisions, or if it is a point symbol layer placed after a line symbol layer.",
       "sdk-support": {
         "basic functionality": {
           "js": "0.10.0",
